@@ -6,4 +6,149 @@
     android:layout_height="match_parent"
     tools:context="com.example.estelleyyy.clinic_in_a_box.Questionnaire">
 
+    <TextView
+        android:id="@+id/questitle"
+        android:layout_width="86dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="casual"
+        android:text="Hello!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginStart="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/q1"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:text="1. Does he/she has response to social cues?"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="89dp" />
+
+            <RadioButton
+                android:id="@+id/q1Yes"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:text="Yes"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="155dp" />
+
+            <RadioButton
+                android:id="@+id/q1No"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:text="No"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="123dp" />
+
+            <TextView
+                android:id="@+id/q2"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:text="2. Weak/high-ptched/continuous cry?"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="203dp" />
+
+            <RadioButton
+                android:id="@+id/q2Yes"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:text="Yes"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="238dp" />
+
+            <RadioButton
+                android:id="@+id/q2No"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:text="No"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="270dp" />
+
+            <TextView
+                android:id="@+id/q3"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:text="3. Cold heads/feet?"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="321dp" />
+
+            <RadioButton
+                android:id="@+id/q3Yes"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:text="Yes"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="362dp" />
+
+            <RadioButton
+                android:id="@+id/q3No"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="395dp" />
+
+            <TextView
+                android:id="@+id/q4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4. Grunting, or Sleep apnea?" />
+
+            <RadioButton
+                android:id="@+id/q4Yes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/q4No"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No" />
+
+            <TextView
+                android:id="@+id/q5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5. Skin/Lips/Touge appearance:" />
+
+            <RadioButton
+                android:id="@+id/q5yes1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mottled/Ashen/Cyanosis" />
+
+            <RadioButton
+                android:id="@+id/q5yes2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pale or Flushed" />
+
+            <RadioButton
+                android:id="@+id/q5No"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No abnormal appearance" />
+        </LinearLayout>
+
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>
