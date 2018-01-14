@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clinic In A Box"
+        android:text="Clinic in A Box"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
         android:layout_marginStart="29dp"
         android:layout_marginTop="112dp"
         android:onClick="goToNext"
-        android:text="Button"
+        android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView" />
