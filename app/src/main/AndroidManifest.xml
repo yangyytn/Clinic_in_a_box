@@ -20,7 +20,9 @@
         <activity android:name=".Questionnaire" />
         <activity android:name=".Diagnosis" />
         <activity android:name=".Report" />
-        <activity android:name=".Finish"></activity>
+        <activity android:name=".Finish" />
+        <activity android:name=".Diagnosis_BP" />
+        <activity android:name=".Diagnosis_BO"></activity>
     </application>
 
 </manifest>
