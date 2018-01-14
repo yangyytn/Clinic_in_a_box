@@ -8,11 +8,11 @@
 
     <TextView
         android:id="@+id/questitle"
-        android:layout_width="86dp"
-        android:layout_height="95dp"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:layout_marginStart="26dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif"
         android:text="Hello!"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintStart_toStartOf="parent"
@@ -147,6 +147,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="No abnormal appearance" />
+
+            <Button
+                android:id="@+id/Submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="goToNext"
+                android:text="Submit" />
         </LinearLayout>
 
     </ScrollView>
