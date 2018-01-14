@@ -4,34 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.estelleyyy.clinic_in_a_box.Diagnosis">
+    tools:context="com.example.estelleyyy.clinic_in_a_box.Diagnosis_BO">
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editText3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="63dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="129dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="Put on the arm band and then put the sensor inside the band "
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        android:text="Please press the sensor on button and put the finger in it"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="203dp"
-        android:onClick="goToNext"
+        android:layout_marginBottom="182dp"
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editText3" />
 </android.support.constraint.ConstraintLayout>
