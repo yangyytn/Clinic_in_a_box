@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.estelleyyy.clinic_in_a_box.Report">
 
+    <Button
+        android:id="@+id/finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="157dp"
+        android:layout_marginStart="134dp"
+        android:onClick="goToNext"
+        android:text="Finish"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
