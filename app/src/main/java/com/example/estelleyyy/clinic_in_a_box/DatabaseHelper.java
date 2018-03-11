@@ -49,30 +49,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    //Add new patient
+    //Get all patients
     public Cursor getAllPatients(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor result = db.rawQuery("select * from " + TABLE_NAME, null);
         return result;
     }
 
-    //Print out the database as a string
-    public String databaseToString(){
-        String dbString = "";
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + "WHERE 1";
-
-        //Cursor point to a location in your results
-        Cursor c = db.rawQuery(query, null);
-        c.moveToFirst();
-
-        while (!c.isAfterLast()){
-            if (c.getString(c.getColumnIndex("patientname"))!=null){
-                dbString += c.getString(c.getColumnIndex("patientname"));
-                dbString += "\n";
-            }
-        }
-        db.close();
-        return dbString;
-    }
 }
