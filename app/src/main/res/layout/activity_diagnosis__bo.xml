@@ -20,14 +20,17 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="331dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="55dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="151dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="130dp"
         android:text="Please press the sensor on button and put the finger in it"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
