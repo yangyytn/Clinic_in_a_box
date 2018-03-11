@@ -17,4 +17,6 @@ public class Diagnosis_BP extends AppCompatActivity {
         Intent startNewActivity = new Intent(this, Diagnosis_BO.class);
         startActivity(startNewActivity);
     }
+
+    
 }
