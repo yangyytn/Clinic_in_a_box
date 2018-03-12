@@ -21,7 +21,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         myDatatbase = new DatabaseHelper(this);
-        editName = (EditText) findViewById(R.id.editText4);
+        editName = (EditText) findViewById(R.id.lastName);
         btnAdd = (Button) findViewById(R.id.buttonAdd);
         btnViewAll = (Button) findViewById(R.id.buttonViewAll);
         AddPatient();
@@ -76,6 +76,11 @@ public class Login extends AppCompatActivity {
 
     public void goToNext(View v){
         Intent startNewActivity = new Intent(this, Questionnaire.class);
+        startActivity(startNewActivity);
+    }
+
+    public void goToSignUp(View v){
+        Intent startNewActivity = new Intent(this, SignUp.class);
         startActivity(startNewActivity);
     }
 }
