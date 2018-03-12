@@ -8,12 +8,12 @@
 
     <TextView
         android:id="@+id/questitle"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="26dp"
+        android:layout_width="761dp"
+        android:layout_height="41dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif"
         android:text="Hello, welcome to the remote clinic!"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,8 +26,10 @@
         android:layout_marginStart="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questitle">
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,7 +101,6 @@
             </RadioGroup>
 
 
-
             <RadioGroup
                 android:id="@+id/radioGroup3"
                 android:layout_width="fill_parent"
@@ -132,7 +133,6 @@
             </RadioGroup>
 
 
-
             <RadioGroup
                 android:id="@+id/radioGroup4"
                 android:layout_width="fill_parent"
@@ -157,8 +157,6 @@
                     android:layout_height="wrap_content"
                     android:text="No" />
             </RadioGroup>
-
-
 
 
             <RadioGroup
@@ -203,5 +201,17 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="712dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="62dp"
+        android:text="  For the following questions, please select the answer that best applies to the patient: "
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

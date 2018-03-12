@@ -182,7 +182,7 @@ public class Questionnaire extends AppCompatActivity {
 
         // get test results
 
-        // push the questionnaire & test results to the database
+        // push the questionnaire & test results to the database[]
 
 
     }
