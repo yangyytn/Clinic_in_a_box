@@ -19,10 +19,13 @@
         <activity android:name=".Login" />
         <activity android:name=".Questionnaire" />
         <activity android:name=".Diagnosis" />
-        <activity android:name=".Report" />
         <activity android:name=".Finish" />
         <activity android:name=".Diagnosis_BP" />
-        <activity android:name=".Diagnosis_BO"></activity>
+        <activity android:name=".Diagnosis_BO" />
+        <activity
+            android:name=".TabReportActivity"
+            android:label="@string/title_activity_tab_report"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
