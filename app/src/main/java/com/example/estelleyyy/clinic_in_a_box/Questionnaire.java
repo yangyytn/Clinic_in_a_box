@@ -170,7 +170,7 @@ public class Questionnaire extends AppCompatActivity {
 
 
     public void goToNext(View v){
-        Intent startNewActivity = new Intent(this, Diagnosis.class);
+        Intent startNewActivity = new Intent(this, Diagnosis_BP.class);
         startActivity(startNewActivity);
     }
 
