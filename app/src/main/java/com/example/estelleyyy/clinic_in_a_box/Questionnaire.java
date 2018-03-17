@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -16,6 +17,8 @@ public class Questionnaire extends AppCompatActivity {
     private RadioGroup RadioGroup1, RadioGroup2, RadioGroup3, RadioGroup4, RadioGroup5;
     private RadioButton RadioButton1, RadioButton2, RadioButton3, RadioButton4, RadioButton5;
     private Button btnDisplay;
+    boolean selectionAll = true;  //flag to check if user answers to all problem
+    boolean doTest = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,8 @@ public class Questionnaire extends AppCompatActivity {
         btnDisplay = (Button) findViewById(R.id.Submit);
         // store questionnaire results
         final int[] Qresults;
-        Qresults = new int[5];
+        Qresults = new int[6];
+
 
 
         btnDisplay.setOnClickListener(new OnClickListener() {
@@ -59,9 +63,14 @@ public class Questionnaire extends AppCompatActivity {
                         Qresults[0] = 0;
                         break;
 
+                    case R.id.q1Mid:
+                        Qresults[0] = 2;
+                        break;
+
                     default:
                         //error: should not happen
                         System.out.println("Error in selection.");
+                        Qresults[0] = -1;
                         break;
                 }
 
@@ -82,6 +91,7 @@ public class Questionnaire extends AppCompatActivity {
                     default:
                         //error: should not happen
                         System.out.println("Error in selection.");
+                        Qresults[1] = -1;
                         break;
                 }
 
@@ -101,6 +111,7 @@ public class Questionnaire extends AppCompatActivity {
                     default:
                         //error: should not happen
                         System.out.println("Error in selection.");
+                        Qresults[2] = -1;
                         break;
                 }
 
@@ -121,6 +132,7 @@ public class Questionnaire extends AppCompatActivity {
                     default:
                         //error: should not happen
                         System.out.println("Error in selection.");
+                        Qresults[3] = -1;
                         break;
                 }
 
@@ -146,20 +158,71 @@ public class Questionnaire extends AppCompatActivity {
                     default:
                         //error: should not happen
                         System.out.println("Error in selection.");
+                        Qresults[4] = -1;
                         break;
                 }
 
 
+                EditText age = (EditText) findViewById(R.id.age);
+                String ageStr = age.getText().toString();
+                if(ageStr != null && !ageStr.isEmpty()) {
+                    int ageInt = Integer.parseInt(ageStr);
+                    if (ageInt<=5 && ageInt>=0) {
+                        Qresults[5] = ageInt;
+                    }
+                    else {
+                        System.out.println("Error in selection.");
+                        Qresults[5] = -2;
+                        Toast showUp = Toast.makeText(Questionnaire.this, "The remote clinic is only applicable for infants and children under 5 years of age.", Toast.LENGTH_SHORT);
+                        showUp.show();
+                    }
+                }
+                // empty input
+                else {
+                    Qresults[5] = -1;
+                }
+
+
+
                 System.out.println("print out the answer array: ");
-                for (int i = 0; i<5; i++) {
+                for (int i = 0; i<6; i++) {
                     System.out.println(Qresults[i]);
                 }
 
-                // store the answers
-                PushToDatabase(Qresults);
+                for (int i = 0; i<Qresults.length; i++) {
+                    if (Qresults[i] == -1) {
+                        selectionAll = false;
+                        System.out.println("selection all flag: " + selectionAll);
+                    }
+                    if (Qresults[0] != -1 && Qresults[1] != -1 && Qresults[2] != -1 && Qresults[3] != -1 && Qresults[4] != -1 && Qresults[5] != -1) {
+                        selectionAll = true;
+                        System.out.println("selection all flag: " + selectionAll);
+                    }
+                }
 
-                // when "Submit" clicked, last step -> switch to the next page
-                goToNext(v);
+
+
+                // only when all questions are answered, shall we proceed to the next step
+                if (selectionAll == true) {
+
+                    // store the answers
+                    PushToDatabase(Qresults);
+
+                    // analysis of the results, determine what physical tests needed to perform
+                    if (!AnalyzeQresults(Qresults)) {
+                        // do not need tests...
+                        Toast NoTest = Toast.makeText(Questionnaire.this, "The patient is healthy! No physical tests needed.", Toast.LENGTH_SHORT);
+                        NoTest.show();
+                        goToFinish(v);
+                    } else {
+                        // when "Submit" clicked, last step -> switch to the next page
+                        goToNext(v);
+                    }
+
+                } else {
+                    Toast showUp = Toast.makeText(Questionnaire.this, "Please answer to all questions", Toast.LENGTH_SHORT);
+                    showUp.show();
+                }
 
 
             }
@@ -168,13 +231,43 @@ public class Questionnaire extends AppCompatActivity {
 
     }
 
-
-    public void goToNext(View v){
+    // go to the next page
+    public void goToNext(View v) {
         Intent startNewActivity = new Intent(this, Diagnosis_BP.class);
         startActivity(startNewActivity);
     }
 
+    // go to the last page (no tests needed)
+    public void goToFinish(View v) {
+        Intent startNewActivity = new Intent(this, Finish.class);
+        startActivity(startNewActivity);
+    }
 
+    public boolean AnalyzeQresults(int[] Qresults) {
+
+        // if answer all NO: no need to do test
+        // if all YES: do all tests
+
+        for (int i = 0; i< Qresults.length; i++) {
+            if (i != Qresults.length && Qresults[i] == 0) {
+                doTest = false;
+            }
+            else if (Qresults[i] == 1)
+                doTest = true;
+        }
+
+        System.out.println("The doTest flag is: " + doTest);
+
+        // print to UI
+
+        if (doTest)
+            return true;
+        else return false;
+
+    }
+
+
+    //todo!!!!
     public void PushToDatabase(int[] Qresult) {
 
         // first analyze the results, see what tests are needed:
