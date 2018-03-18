@@ -203,7 +203,7 @@ public class Questionnaire extends AppCompatActivity {
 
 
                 // only when all questions are answered, shall we proceed to the next step
-                if (selectionAll == true) {
+                if ((selectionAll == true) && (Qresults[5] != -2)) {
 
                     // store the answers
                     PushToDatabase(Qresults);
@@ -219,7 +219,7 @@ public class Questionnaire extends AppCompatActivity {
                         goToNext(v);
                     }
 
-                } else {
+                } else if (Qresults[5] != -2) {
                     Toast showUp = Toast.makeText(Questionnaire.this, "Please answer to all questions", Toast.LENGTH_SHORT);
                     showUp.show();
                 }
@@ -247,15 +247,12 @@ public class Questionnaire extends AppCompatActivity {
 
         // if answer all NO: no need to do test
         // if all YES: do all tests
-
-        for (int i = 0; i< Qresults.length; i++) {
-            if (i != Qresults.length && Qresults[i] == 0) {
-                doTest = false;
-            }
-            else if (Qresults[i] == 1)
-                doTest = true;
+        int[] QuestionAnswers;
+        QuestionAnswers = new int[5];
+        for (int i = 0; i<QuestionAnswers.length; i++) {
+            QuestionAnswers[i] = Qresults[i];
         }
-
+        doTest = contains(QuestionAnswers, 1);
         System.out.println("The doTest flag is: " + doTest);
 
         // print to UI
@@ -266,6 +263,20 @@ public class Questionnaire extends AppCompatActivity {
 
     }
 
+    // function to check if a value is in an array
+    public static boolean contains(final int[] array, final int v) {
+
+        boolean result = false;
+
+        for(int i : array){
+            if(i == v){
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
 
     //todo!!!!
     public void PushToDatabase(int[] Qresult) {
