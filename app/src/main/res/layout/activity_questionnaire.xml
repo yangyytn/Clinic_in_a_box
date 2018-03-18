@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/questitle"
         android:layout_width="761dp"
-        android:layout_height="41dp"
+        android:layout_height="55dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif"
         android:text="Hello, welcome to the remote clinic!"
@@ -36,6 +36,25 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="  Patient Age: "
+                android:textColor="@color/colorPrimaryDark" />
+
+
+            <EditText
+                android:id="@+id/age"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <RadioGroup
                 android:id="@+id/radioGroup1"
                 android:layout_width="fill_parent"
@@ -59,10 +78,18 @@
                     tools:layout_editor_absoluteY="155dp" />
 
                 <RadioButton
+                    android:id="@+id/q1Mid"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:text="Weak response, only wakes with prolonged stimulation"
+                    tools:layout_editor_absoluteX="38dp"
+                    tools:layout_editor_absoluteY="123dp" />
+
+                <RadioButton
                     android:id="@+id/q1No"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
-                    android:text="No"
+                    android:text="No response"
                     tools:layout_editor_absoluteX="38dp"
                     tools:layout_editor_absoluteY="123dp" />
 
@@ -208,7 +235,7 @@
         android:layout_height="29dp"
         android:layout_marginBottom="12dp"
         android:layout_marginTop="62dp"
-        android:text="  For the following questions, please select the answer that best applies to the patient: "
+        android:text="   For the following questions, please select the answer that best applies to the patient: "
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintStart_toStartOf="parent"
