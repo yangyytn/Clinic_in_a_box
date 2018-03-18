@@ -14,7 +14,7 @@ public class Diagnosis_BO extends AppCompatActivity {
     }
 
     public void goToNext(View v){
-        Intent startNewActivity = new Intent(this, Report.class);
+        Intent startNewActivity = new Intent(this, Diagnosis.class);
         startActivity(startNewActivity);
     }
 }
