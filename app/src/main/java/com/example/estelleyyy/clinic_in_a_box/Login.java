@@ -11,7 +11,7 @@ import android.widget.Toast;
 import android.database.Cursor;
 
 public class Login extends AppCompatActivity {
-    DatabaseHelper myDatatbase;
+    DatabaseHelper databaseHelper;
     EditText editName;
     Button btnAdd;
     Button btnViewAll;
@@ -20,8 +20,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        myDatatbase = new DatabaseHelper(this);
-        editName = (EditText) findViewById(R.id.lastName);
+        databaseHelper = new DatabaseHelper(this);
+        editName = (EditText) findViewById(R.id.userID);
         btnAdd = (Button) findViewById(R.id.buttonAdd);
         btnViewAll = (Button) findViewById(R.id.buttonViewAll);
         AddPatient();
@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    boolean isInserted = myDatatbase.insertPatient(editName.getText().toString());
+                    boolean isInserted = databaseHelper.insertPatient(editName.getText().toString());
                     if (isInserted)
                         Toast.makeText(Login.this,"Data Inserted", Toast.LENGTH_LONG).show();
                     else
@@ -48,15 +48,19 @@ public class Login extends AppCompatActivity {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Cursor result = myDatatbase.getAllPatients();
+                    Cursor result = databaseHelper.getAllPatients();
                     if (result.getCount() == 0){
                         showMessage("Error", "No Data in Database");
                         return;
                     }
                     StringBuffer buffer = new StringBuffer();
+
                     while (result.moveToNext()) {
                         buffer.append("Id :" + result.getString(0) + "\n");
-                        buffer.append("Name :" + result.getString(1) + "\n");
+                        buffer.append("First Name :" + result.getString(1) + "\n");
+                        buffer.append("Last Name :" + result.getString(2) + "\n");
+                        buffer.append("Age :" + result.getString(3) + "\n");
+                        buffer.append("Password :" + result.getString(4) + "\n");
                     }
 
                     //Show Data in Database
@@ -75,8 +79,22 @@ public class Login extends AppCompatActivity {
     }
 
     public void goToNext(View v){
-        Intent startNewActivity = new Intent(this, Questionnaire.class);
-        startActivity(startNewActivity);
+        EditText userId = (EditText)findViewById(R.id.userID);
+        String userIdStr = userId.getText().toString();
+        EditText password = (EditText)findViewById(R.id.password);
+        String passwordStr = password.getText().toString();
+
+        String passwordValid = databaseHelper.searchPassword(userIdStr);
+
+        if (passwordStr.equals(passwordValid)){
+            Intent startNewActivity = new Intent(this, Questionnaire.class);
+            startActivity(startNewActivity);
+        }
+        else{
+            Toast pw = Toast.makeText(Login.this, "Incorrect Password" + passwordValid, Toast.LENGTH_SHORT);
+            pw.show();
+        }
+
     }
 
     public void goToSignUp(View v){
