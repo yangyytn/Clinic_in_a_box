@@ -35,6 +35,7 @@ public class Login extends AppCompatActivity {
                     public void onClick(View view) {
 
                         //insert the patient data into the database
+                        /*
                         TestData t = new TestData();
                         t.setQ1(3);
                         t.setQ2(5);
@@ -47,7 +48,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this, "Test Data Not Inserted", Toast.LENGTH_LONG).show();
                         }
 
-
+*/
                         Cursor result = databaseHelper.getAllTestData();
                         if (result.getCount() == 0){
                             showMessage("Error", "No Test Data in Database");
