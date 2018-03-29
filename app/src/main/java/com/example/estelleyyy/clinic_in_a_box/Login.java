@@ -13,8 +13,8 @@ import android.database.Cursor;
 public class Login extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     EditText editName;
-    Button btnAdd;
-    Button btnViewAll;
+    Button btnViewTest;
+    Button btnViewPatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,29 +22,65 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         databaseHelper = new DatabaseHelper(this);
         editName = (EditText) findViewById(R.id.userID);
-        btnAdd = (Button) findViewById(R.id.buttonAdd);
-        btnViewAll = (Button) findViewById(R.id.buttonViewAll);
-        AddPatient();
+        btnViewTest = (Button) findViewById(R.id.buttonTest);
+        btnViewPatient = (Button) findViewById(R.id.buttonPatient);
+        viewAllTestData();
         viewAllPatients();
     }
 
-    public void AddPatient(){
-        btnAdd.setOnClickListener(
-            new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    boolean isInserted = databaseHelper.insertPatient(editName.getText().toString());
-                    if (isInserted)
-                        Toast.makeText(Login.this,"Data Inserted", Toast.LENGTH_LONG).show();
-                    else
-                        Toast.makeText(Login.this,"Data Not Inserted", Toast.LENGTH_LONG).show();
+    public void viewAllTestData(){
+        btnViewTest.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        //insert the patient data into the database
+                        TestData t = new TestData();
+                        t.setQ1(3);
+                        t.setQ2(5);
+
+                        boolean isInserted = databaseHelper.insertTest(t);
+                        if (isInserted) {
+                            Toast.makeText(Login.this, "Test Data Inserted", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(Login.this, "Test Data Not Inserted", Toast.LENGTH_LONG).show();
+                        }
+
+
+                        Cursor result = databaseHelper.getAllTestData();
+                        if (result.getCount() == 0){
+                            showMessage("Error", "No Test Data in Database");
+                            return;
+                        }
+                        StringBuffer buffer = new StringBuffer();
+
+                        while (result.moveToNext()) {
+                            buffer.append("Test Id :" + result.getString(0) + "\n");
+                            buffer.append("Patient ID :" + result.getString(1) + "\n");
+                            buffer.append("Test Date :" + result.getString(2) + "\n");
+                            buffer.append("Test Age :" + result.getString(3) + "\n");
+                            buffer.append("Q1 :" + result.getString(4) + "\n");
+                            buffer.append("Q2 :" + result.getString(5) + "\n");
+                            buffer.append("Q3 :" + result.getString(6) + "\n");
+                            buffer.append("Q4 :" + result.getString(7) + "\n");
+                            buffer.append("Q5 :" + result.getString(8) + "\n");
+                            buffer.append("P1 :" + result.getString(9) + "\n");
+                            buffer.append("P2 :" + result.getString(10) + "\n");
+                            buffer.append("P3 :" + result.getString(11) + "\n");
+                            buffer.append("Risk :" + result.getString(12) + "\n");
+
+                        }
+
+                        //Show Data in Database
+                        showMessage("Test Data", buffer.toString());
+                    }
                 }
-            }
         );
     }
 
     public void viewAllPatients(){
-        btnViewAll.setOnClickListener(
+        btnViewPatient.setOnClickListener(
             new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -87,6 +123,9 @@ public class Login extends AppCompatActivity {
         String passwordValid = databaseHelper.searchPassword(userIdStr);
 
         if (passwordStr.equals(passwordValid)){
+            ((GlobalVariables) this.getApplication()).setPatientID(Integer.parseInt(userIdStr));
+            //TO DO: Add to Sign Up
+
             Intent startNewActivity = new Intent(this, Questionnaire.class);
             startActivity(startNewActivity);
         }
