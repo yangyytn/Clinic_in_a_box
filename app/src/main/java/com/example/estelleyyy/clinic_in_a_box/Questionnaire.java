@@ -209,15 +209,15 @@ public class Questionnaire extends AppCompatActivity {
                     PushToDatabase(Qresults);
 
                     // analysis of the results, determine what physical tests needed to perform
-                    if (!AnalyzeQresults(Qresults)) {
+                   /* if (!AnalyzeQresults(Qresults)) {
                         // do not need tests...
                         Toast NoTest = Toast.makeText(Questionnaire.this, "The patient is healthy! No physical tests needed.", Toast.LENGTH_SHORT);
                         NoTest.show();
                         goToFinish(v);
-                    } else {
+                    } else {*/
                         // when "Submit" clicked, last step -> switch to the next page
-                        goToNext(v);
-                    }
+                    goToNext(v);
+                    //}
 
                 } else if (Qresults[5] != -2) {
                     Toast showUp = Toast.makeText(Questionnaire.this, "Please answer to all questions", Toast.LENGTH_SHORT);
@@ -278,10 +278,10 @@ public class Questionnaire extends AppCompatActivity {
         return result;
     }
 
-    //todo!!!!
-    public void PushToDatabase(int[] Qresult) {
 
-        // first analyze the results, see what tests are needed:
+
+    //todo!!!! connect to database
+    public void PushToDatabase(int[] Qresult) {
 
 
         // get test results
