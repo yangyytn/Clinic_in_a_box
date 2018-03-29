@@ -170,7 +170,7 @@
                     android:id="@+id/q4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="4. Grunting, or sleep apnea?" />
+                    android:text="4. Grunting, or sleep apnea (pause in breathing)?" />
 
                 <RadioButton
                     android:id="@+id/q4Yes"
@@ -204,11 +204,35 @@
                     android:layout_height="wrap_content"
                     android:text="Mottled/Ashen/Cyanosis" />
 
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ashen"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="150dp"
+                    android:maxHeight="150dp"
+                    android:scaleType="fitCenter"
+                    tools:layout_editor_absoluteX="55dp"
+                    tools:layout_editor_absoluteY="130dp" />
+
                 <RadioButton
                     android:id="@+id/q5yes2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Pale or Flushed" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/flushed"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="150dp"
+                    android:maxHeight="150dp"
+                    android:scaleType="fitCenter"
+                    tools:layout_editor_absoluteX="5dp"
+                    tools:layout_editor_absoluteY="13dp" />
 
                 <RadioButton
                     android:id="@+id/q5No"
@@ -217,6 +241,9 @@
                     android:text="No abnormal appearance" />
 
             </RadioGroup>
+
+
+
 
 
             <Button
