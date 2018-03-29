@@ -14,7 +14,10 @@ public class Diagnosis_BP extends AppCompatActivity {
     }
 
     public void goToNext(View v){
-        Intent startNewActivity = new Intent(this, Diagnosis_BO.class);
+
+        // for testing only! go to questionnaire page
+        Intent startNewActivity = new Intent(this, Questionnaire.class);
+        //Intent startNewActivity = new Intent(this, Diagnosis_BO.class);
         startActivity(startNewActivity);
     }
 

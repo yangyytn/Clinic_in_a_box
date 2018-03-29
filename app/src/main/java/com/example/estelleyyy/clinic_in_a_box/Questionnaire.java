@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 public class Questionnaire extends AppCompatActivity {
 
+    DatabaseHelper databaseHelper;
+
     private RadioGroup RadioGroup1, RadioGroup2, RadioGroup3, RadioGroup4, RadioGroup5;
     private RadioButton RadioButton1, RadioButton2, RadioButton3, RadioButton4, RadioButton5;
     private Button btnDisplay;
@@ -216,6 +218,7 @@ public class Questionnaire extends AppCompatActivity {
                         goToFinish(v);
                     } else {*/
                         // when "Submit" clicked, last step -> switch to the next page
+                    AlgorithmTest(Qresults);
                     goToNext(v);
                     //}
 
@@ -280,15 +283,57 @@ public class Questionnaire extends AppCompatActivity {
 
 
 
-    //todo!!!! connect to database
+    // connect to database
     public void PushToDatabase(int[] Qresult) {
-
-
-        // get test results
+        databaseHelper = new DatabaseHelper(this);
+        TestData t = new TestData();
 
         // push the questionnaire & test results to the database[]
 
+        t.setQ1(Qresult[0]);
+        t.setQ2(Qresult[1]);
+        t.setQ3(Qresult[2]);
+        t.setQ4(Qresult[3]);
+        t.setQ5(Qresult[4]);
+
+        //todo: push age to database
+        // set age
+        // t.setage(Qresult[5])
+
+        boolean isInserted = databaseHelper.insertTest(t);
+        if (isInserted) {
+            Toast.makeText(Questionnaire.this, "Test Data Inserted", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(Questionnaire.this, "Test Data Not Inserted", Toast.LENGTH_LONG).show();
+        }
+
 
     }
+
+    // test: need to move to after physical tests
+    void AlgorithmTest(int[] Qresult) {
+
+        double result;
+        //Creating function calling class object.
+        DiagnosisAlgorithm FN = new DiagnosisAlgorithm(DiagnosisAlgorithm.context);
+
+        //Calling function from another class .
+        result = FN.RiskPercentAlg(Qresult);
+        System.out.println("The risk percentage is: " + result + "%. ");
+        if (result<30) {
+            System.out.println("虽然测出来的数据显示你没病，但你其实可能很有病");
+        }
+        else if (result>70) {
+            System.out.println("病入膏肓，无药可救");
+        }
+        else {
+            System.out.println("Moderate risk of Sepsis. ");
+            System.out.println("We strongly recommend the patient to take a thorough examination.");
+        }
+
+
+    }
+
 
 }
