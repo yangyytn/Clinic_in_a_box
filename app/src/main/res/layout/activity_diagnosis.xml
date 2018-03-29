@@ -7,5 +7,53 @@
     tools:context="com.example.estelleyyy.clinic_in_a_box.Diagnosis">
 
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="146dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="366dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/red"
+        android:onClick="goToNext"
+        android:text="START"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="639dp"
+        android:layout_height="121dp"
+        android:layout_marginBottom="14dp"
+        android:gravity="center"
+        android:text="Please place the temperature sensor under the armpit and then press"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="727dp"
+        android:layout_height="688dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintHorizontal_bias="0.146"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:srcCompat="@drawable/temp_banner" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="466dp"
+        android:layout_height="418dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/temperature_sensor_big" />
 
 </android.support.constraint.ConstraintLayout>
