@@ -18,7 +18,7 @@ public class Welcome extends AppCompatActivity {
     }
 
     public void gotoreport(View v){
-        Intent startNewActivity = new Intent(this, TabReportActivity.class);
+        Intent startNewActivity = new Intent(this, Diagnosis.class);
         startActivity(startNewActivity);
     }
 
