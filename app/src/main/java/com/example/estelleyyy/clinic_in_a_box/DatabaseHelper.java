@@ -138,9 +138,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Search for valid password given userid
-    public String searchPassword(String id){
+    public String searchPassword(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT _id, password from " + TABLE_NAME_PATIENT ;
+        Cursor cursor = db.rawQuery(query, null);
+
+        String a,b;
+        b = "Not Found";
+        if (cursor.moveToFirst()) {
+            do {
+                a = cursor.getString(0);
+                if (a.equals(id)) {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+
+        return b;
+    }
+
+    //Search for First Name given userid
+    public String searchFirstName(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT _id, firsname from " + TABLE_NAME_PATIENT ;
         Cursor cursor = db.rawQuery(query, null);
 
         String a,b;

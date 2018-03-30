@@ -126,11 +126,15 @@ public class Login extends AppCompatActivity {
         EditText password = (EditText)findViewById(R.id.password);
         String passwordStr = password.getText().toString();
 
-        String passwordValid = databaseHelper.searchPassword(userIdStr);
+        String passwordValid = databaseHelper.searchPassword(Integer.parseInt(userIdStr));
 
         if (passwordStr.equals(passwordValid)){
             // Set PatientID globally
             ((GlobalVariables) this.getApplication()).setPatientID(Integer.parseInt(userIdStr));
+
+            // Set First Name globally
+            String firstName = databaseHelper.searchFirstName(Integer.parseInt(userIdStr));
+            ((GlobalVariables) this.getApplication()).setFirstName(firstName);
 
             // Turn To Next Page
             Intent startNewActivity = new Intent(this, Questionnaire.class);

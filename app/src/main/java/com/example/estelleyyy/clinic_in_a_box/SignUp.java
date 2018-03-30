@@ -61,10 +61,9 @@ public class SignUp extends AppCompatActivity {
                     AlertDialog.Builder a_builder = new AlertDialog.Builder(SignUp.this);
                     String signUpId = databaseHelper.searchID(firstNameStr);
 
-                    // Set PatientID globally
+                    // Set PatientID and FirstName globally
                     ((GlobalVariables) this.getApplication()).setPatientID(Integer.parseInt(signUpId));
-
-                    int currentPatientID = ((GlobalVariables) this.getApplication()).getPatientID();
+                    ((GlobalVariables) this.getApplication()).setFirstName(firstNameStr);
 
                     a_builder.setMessage("You have been signed up. \n Your Login Number is " + signUpId + ".")
                            // .setCancelable(false)
