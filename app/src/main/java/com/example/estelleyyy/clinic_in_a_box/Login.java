@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
         editName = (EditText) findViewById(R.id.userID);
         btnViewTest = (Button) findViewById(R.id.buttonTest);
         btnViewPatient = (Button) findViewById(R.id.buttonPatient);
+
         currentPatientID = ((GlobalVariables) this.getApplication()).getPatientID();
 
         viewAllTestData();
@@ -37,11 +38,12 @@ public class Login extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        /*
                         // New Test Data
                         TestData t = new TestData();
                         t.setQ1(3);
                         t.setQ2(5);
-                        t.setPatientID(currentPatientID);
+                        t.setPatientID(currentPatientID); // See Above for declaration
 
                         boolean isInserted = databaseHelper.insertTest(t);
                         if (isInserted) {
@@ -50,7 +52,7 @@ public class Login extends AppCompatActivity {
                         else {
                             Toast.makeText(Login.this, "Test Data Not Inserted", Toast.LENGTH_LONG).show();
                         }
-
+                        */
 
                         Cursor result = databaseHelper.getAllTestData();
                         if (result.getCount() == 0){
