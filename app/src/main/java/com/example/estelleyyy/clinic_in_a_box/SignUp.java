@@ -39,7 +39,15 @@ public class SignUp extends AppCompatActivity {
             String pw2Str = pw2.getText().toString();
 
 
-            if (!pwStr.equals(pw2Str))
+            if ((firstNameStr.trim().length() == 0) ||
+                    (lastNameStr.trim().length() == 0) ||
+                    (ageStr.trim().length() == 0) ||
+                    (pwStr.trim().length() == 0) ||
+                    (pw2Str.trim().length() == 0) ){
+                Toast password = Toast.makeText(SignUp.this, "Please fill in all fields", Toast.LENGTH_SHORT);
+                password.show();
+            }
+            else if (!pwStr.equals(pw2Str))
             {
                 //popup msg
                 Toast password = Toast.makeText(SignUp.this, "Passwords don't match", Toast.LENGTH_SHORT);
