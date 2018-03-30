@@ -10,14 +10,14 @@
     <TextView
         android:id="@+id/questitle"
         android:layout_width="761dp"
-        android:layout_height="55dp"
+        android:layout_height="73dp"
         android:layout_marginBottom="24dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/news_cycle"
         android:text="Hello, welcome to the remote clinic!"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textSize="36sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +49,7 @@
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:text="  Patient Age: "
                     android:textColor="@color/red"
                     android:textSize="24sp" />
@@ -279,15 +280,15 @@
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="247dp"
+                    android:layout_width="424dp"
                     android:layout_height="158dp"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:adjustViewBounds="true"
                     android:background="@color/colorAccent"
-                    android:maxHeight="150dp"
-                    android:maxWidth="150dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ashen"
+                    android:maxHeight="250dp"
+                    android:maxWidth="400dp"
+                    android:scaleType="matrix"
+                    app:srcCompat="@drawable/wenjijijij"
                     tools:layout_editor_absoluteX="55dp"
                     tools:layout_editor_absoluteY="130dp" />
 
@@ -382,10 +383,11 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="765dp"
-        android:layout_height="80dp"
+        android:layout_width="729dp"
+        android:layout_height="91dp"
         android:layout_marginBottom="24dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="90dp"
         android:text="For the following questions, please select the answer that best applies to the patient: "
         android:textColor="@color/red"
         android:textSize="30sp"

@@ -21,7 +21,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
         // BloodPressure[0] = Systolic Pressure
         // BloodPressure[1] = Diastolic Pressure
 
-        int testcase = 7;
+        int testcase = 1;
 
         switch(testcase) {
             case 1:
@@ -58,6 +58,10 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
                 BloodPressure[0] = 80;
                 BloodPressure[1] = 45;
                 break;
+
+            default:
+                break;
+                
         }
 
 
@@ -67,7 +71,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
 
         double BloodOxy = 0;
 
-        int testcase = 7;
+        int testcase = 1;
 
         switch(testcase) {
             case 1:
@@ -97,6 +101,9 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
             case 7:
                 BloodOxy = 0.91;
                 break;
+
+            default:
+                break;
         }
 
 
@@ -106,7 +113,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
     public double GetTestValue_temp() {
 
         double Temperature = 0;
-        int testcase = 7;
+        int testcase = 1;
 
         switch(testcase) {
             case 1:
@@ -135,6 +142,9 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
 
             case 7:
                 Temperature = 35.7;
+                break;
+
+            default:
                 break;
         }
 

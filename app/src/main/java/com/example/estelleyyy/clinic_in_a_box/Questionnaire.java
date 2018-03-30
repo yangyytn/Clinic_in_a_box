@@ -322,14 +322,15 @@ public class Questionnaire extends AppCompatActivity {
         result = FN.RiskPercentAlg(Qresult);
         System.out.println("The risk percentage is: " + result + "%. ");
         if (result<30) {
-            System.out.println("虽然测出来的数据显示你没病，但你其实可能很有病");
+            System.out.println("The patient has a relatively low chance of getting Sepsis.");
         }
         else if (result>70) {
-            System.out.println("病入膏肓，无药可救");
+            System.out.println("The patient has a relatively high chance of getting Sepsis.");
+            System.out.println("This is urgent. Please go to the local hospital as soon as possible.");
         }
         else {
             System.out.println("Moderate risk of Sepsis. ");
-            System.out.println("We strongly recommend the patient to take a thorough examination.");
+            System.out.println("The patient is strongly recommended to take a thorough examination.");
         }
 
 
