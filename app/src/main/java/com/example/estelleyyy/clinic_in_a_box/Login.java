@@ -15,6 +15,7 @@ public class Login extends AppCompatActivity {
     EditText editName;
     Button btnViewTest;
     Button btnViewPatient;
+    int currentPatientID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,21 +25,23 @@ public class Login extends AppCompatActivity {
         editName = (EditText) findViewById(R.id.userID);
         btnViewTest = (Button) findViewById(R.id.buttonTest);
         btnViewPatient = (Button) findViewById(R.id.buttonPatient);
+        currentPatientID = ((GlobalVariables) this.getApplication()).getPatientID();
+
         viewAllTestData();
         viewAllPatients();
     }
 
     public void viewAllTestData(){
+
         btnViewTest.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        //insert the patient data into the database
-                        /*
+                        // New Test Data
                         TestData t = new TestData();
                         t.setQ1(3);
                         t.setQ2(5);
+                        t.setPatientID(currentPatientID);
 
                         boolean isInserted = databaseHelper.insertTest(t);
                         if (isInserted) {
@@ -48,7 +51,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this, "Test Data Not Inserted", Toast.LENGTH_LONG).show();
                         }
 
-*/
+
                         Cursor result = databaseHelper.getAllTestData();
                         if (result.getCount() == 0){
                             showMessage("Error", "No Test Data in Database");
@@ -124,9 +127,10 @@ public class Login extends AppCompatActivity {
         String passwordValid = databaseHelper.searchPassword(userIdStr);
 
         if (passwordStr.equals(passwordValid)){
+            // Set PatientID globally
             ((GlobalVariables) this.getApplication()).setPatientID(Integer.parseInt(userIdStr));
-            //TO DO: Add to Sign Up
 
+            // Turn To Next Page
             Intent startNewActivity = new Intent(this, Questionnaire.class);
             startActivity(startNewActivity);
         }
