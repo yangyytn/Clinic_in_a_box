@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.Adapter;
 
 /**
  * Created by wenjiazhang on 2018-03-11.
@@ -16,12 +19,21 @@ import android.widget.Toast;
 public class SignUp extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
+    Spinner Agesets = (Spinner) findViewById(R.id.spinner);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         databaseHelper = new DatabaseHelper(this);
         setContentView(R.layout.activity_signup);
+
+        //set variables//
+
+        String[] ages = new String[]{"<1", "1", "2", "3", "4", "5"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, ages);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Agesets.setAdapter(adapter);
     }
 
     public void onSignUpClick(View v){
