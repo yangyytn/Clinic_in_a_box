@@ -7,7 +7,7 @@ package com.example.estelleyyy.clinic_in_a_box;
 public class TestData {
 
     int PatientID, Q1, Q2, Q3, Q4, Q5;
-    float P1, P2, P3, RiskPercentage;
+    float P1, P2, P3, RiskPercentage, TestAge;
 
     public void setPatientID(int PatientID){
         this.PatientID = PatientID;
@@ -15,6 +15,14 @@ public class TestData {
 
     public int getPatientID(){
         return this.PatientID;
+    }
+
+    public void setTestAge(float TestAge){
+        this.TestAge = TestAge;
+    }
+
+    public float getTestAge(){
+        return this.TestAge;
     }
 
     public void setQ1(int Q1){

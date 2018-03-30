@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by wenjiazhang on 2018-01-13.
@@ -177,7 +179,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
+        // Set Test Date to current time
+        Calendar calendar;
+        SimpleDateFormat simpleDateFormat;
+        String Date;
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY HH:mm:ss");
+        Date = simpleDateFormat.format(calendar.getTime());
+
         values.put(COLUMN_PATIENTID,testData.getPatientID());
+        values.put(COLUMN_TESTAGE,testData.getTestAge());
+        values.put(COLUMN_TESTDATE,Date);
         values.put(COLUMN_Q1, testData.getQ1());
         values.put(COLUMN_Q2, testData.getQ2());
         values.put(COLUMN_Q3, testData.getQ3());
@@ -186,7 +198,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_P1, testData.getP1());
         values.put(COLUMN_P2, testData.getP2());
         values.put(COLUMN_P1, testData.getP3());
-        //TO DO: ADD DATE TIME
+        values.put(COLUMN_RISK, testData.getRiskPercentage());
 
         long result = db.insert(TABLE_NAME_TEST, null, values);
         db.close();
