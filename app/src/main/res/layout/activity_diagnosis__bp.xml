@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context="com.example.estelleyyy.clinic_in_a_box.Diagnosis_BP"
     tools:layout_editor_absoluteY="81dp">
 
