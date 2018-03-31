@@ -10,11 +10,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 
 
 public class Questionnaire extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
+    Spinner AgeSets;
 
     private RadioGroup RadioGroup1, RadioGroup2, RadioGroup3, RadioGroup4, RadioGroup5;
     private RadioButton RadioButton1, RadioButton2, RadioButton3, RadioButton4, RadioButton5;
@@ -26,6 +29,14 @@ public class Questionnaire extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
+
+        //set variables//
+        AgeSets = (Spinner) findViewById(R.id.spinner);
+        String[] ages = new String[]{"Less than 12 months", "1", "2", "3", "4", "5"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, ages);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        AgeSets.setAdapter(adapter);
 
         addListenerOnButton();
     }
@@ -165,8 +176,8 @@ public class Questionnaire extends AppCompatActivity {
                 }
 
 
-                EditText age = (EditText) findViewById(R.id.age);
-                String ageStr = age.getText().toString();
+                Spinner age = (Spinner) findViewById(R.id.spinner);
+                String ageStr = age.getSelectedItem().toString();
                 if(ageStr != null && !ageStr.isEmpty()) {
                     int ageInt = Integer.parseInt(ageStr);
                     if (ageInt<=5 && ageInt>=0) {
@@ -255,6 +266,12 @@ public class Questionnaire extends AppCompatActivity {
         for (int i = 0; i<QuestionAnswers.length; i++) {
             QuestionAnswers[i] = Qresults[i];
         }
+
+        // push Qanswers to global variables
+        ((GlobalVariables) this.getApplication()).setQresult(QuestionAnswers);
+        // push age to global variables:
+        ((GlobalVariables) this.getApplication()).setAge(Qresults[5]);
+
         doTest = contains(QuestionAnswers, 1);
         System.out.println("The doTest flag is: " + doTest);
 
@@ -300,6 +317,7 @@ public class Questionnaire extends AppCompatActivity {
         // set age
         // t.setage(Qresult[5])
 
+
         boolean isInserted = databaseHelper.insertTest(t);
         if (isInserted) {
             Toast.makeText(Questionnaire.this, "Test Data Inserted", Toast.LENGTH_LONG).show();
@@ -311,7 +329,7 @@ public class Questionnaire extends AppCompatActivity {
 
     }
 
-    // test: need to move to after physical tests
+    // todo: test: need to be removed after
     void AlgorithmTest(int[] Qresult) {
 
         double result;
@@ -321,7 +339,7 @@ public class Questionnaire extends AppCompatActivity {
         //Calling function from another class .
         result = FN.RiskPercentAlg(Qresult);
         System.out.println("The risk percentage is: " + result + "%. ");
-        if (result<30) {
+        if (result<25) {
             System.out.println("The patient has a relatively low chance of getting Sepsis.");
         }
         else if (result>70) {

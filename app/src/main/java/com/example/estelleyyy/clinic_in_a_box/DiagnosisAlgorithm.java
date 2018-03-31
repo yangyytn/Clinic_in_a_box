@@ -61,7 +61,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
 
             default:
                 break;
-                
+
         }
 
 
@@ -232,6 +232,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
 
         //based on tests
 
+        // todo: save these physical test results into global variables
         double[] BloodPressure = new double[2];
         GetTestValue_bloodPressure(BloodPressure);
         double oxygen = GetTestValue_bloodOxy();

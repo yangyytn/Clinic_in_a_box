@@ -91,6 +91,48 @@ public class TabReportActivity extends AppCompatActivity {
     }
 
 
+
+
+
+    // function to display (current) test result
+    void CurrentTestResult(int[] Qresult) {
+
+        double result;
+        //Creating function calling class object.
+        DiagnosisAlgorithm FN = new DiagnosisAlgorithm(DiagnosisAlgorithm.context);
+
+        //Calling function from another class.
+        result = FN.RiskPercentAlg(Qresult);
+
+        //set risk percentage to global varibale
+        ((GlobalVariables) this.getApplication()).setRisk(result);
+
+        System.out.println("The risk percentage is: " + result + "%. ");
+        if (result<25) {
+            System.out.println("The patient has a relatively low chance of getting Sepsis.");
+        }
+        else if (result>70) {
+            System.out.println("The patient has a relatively high chance of getting Sepsis.");
+            System.out.println("This is urgent. Please go to the local hospital as soon as possible.");
+        }
+        else {
+            System.out.println("Moderate risk of Sepsis.");
+            System.out.println("The patient is strongly recommended to take a thorough examination.");
+        }
+
+        //display the physical test measurements:
+        double[] BloodPressure = ((GlobalVariables) this.getApplication()).getBloodPressure();
+        double BloodOxy = ((GlobalVariables) this.getApplication()).getOxygen();
+        double temp = ((GlobalVariables) this.getApplication()).getTemp();
+        System.out.println("Below shows the physical test results for the current patient: ");
+        System.out.println("Systolic Pressure: " + BloodPressure[0]);
+        System.out.println("Diastolic Pressure: " + BloodPressure[1]);
+        System.out.println("Blood Oxygen: " + BloodOxy);
+        System.out.println("Body Temperature: " + temp);
+
+    }
+
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
