@@ -62,7 +62,7 @@ public class SignUp extends AppCompatActivity {
             else if (!pwStr.equals(pw2Str))
             {
                 //popup msg
-                Toast password = Toast.makeText(SignUp.this, "Passwords don't match", Toast.LENGTH_SHORT);
+                Toast password = Toast.makeText(SignUp.this, "Passwords do not match", Toast.LENGTH_SHORT);
                 password.show();
             }
             else
