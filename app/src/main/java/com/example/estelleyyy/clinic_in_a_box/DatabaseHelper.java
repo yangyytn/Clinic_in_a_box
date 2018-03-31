@@ -148,7 +148,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 a = cursor.getString(0);
-                if (a.equals(id)) {
+                if (a.equals(Integer.toString(id))) {
                     b = cursor.getString(1);
                     break;
                 }
@@ -162,7 +162,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Search for First Name given userid
     public String searchFirstName(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT _id, firsname from " + TABLE_NAME_PATIENT ;
+        String query = "SELECT _id, firstname from " + TABLE_NAME_PATIENT ;
         Cursor cursor = db.rawQuery(query, null);
 
         String a,b;
@@ -170,7 +170,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 a = cursor.getString(0);
-                if (a.equals(id)) {
+                if (a.equals(Integer.toString(id))) {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while (cursor.moveToNext());
+        }
+
+        return b;
+    }
+
+    public String searchLastName(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT _id, lastname from " + TABLE_NAME_PATIENT ;
+        Cursor cursor = db.rawQuery(query, null);
+
+        String a,b;
+        b = "Not Found";
+        if (cursor.moveToFirst()) {
+            do {
+                a = cursor.getString(0);
+                if (a.equals(Integer.toString(id))) {
                     b = cursor.getString(1);
                     break;
                 }
