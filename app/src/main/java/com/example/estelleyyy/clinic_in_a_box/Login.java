@@ -12,7 +12,8 @@ import android.database.Cursor;
 
 public class Login extends AppCompatActivity {
     DatabaseHelper databaseHelper;
-    EditText editName;
+    EditText userId;
+    EditText password;
     Button btnViewTest;
     Button btnViewPatient;
     int currentPatientID;
@@ -21,8 +22,11 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         databaseHelper = new DatabaseHelper(this);
-        editName = (EditText) findViewById(R.id.userID);
+
+        userId = (EditText)findViewById(R.id.userID);
+        password = (EditText)findViewById(R.id.password);
         btnViewTest = (Button) findViewById(R.id.buttonTest);
         btnViewPatient = (Button) findViewById(R.id.buttonPatient);
 
@@ -121,9 +125,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void goToNext(View v){
-        EditText userId = (EditText)findViewById(R.id.userID);
         String userIdStr = userId.getText().toString();
-        EditText password = (EditText)findViewById(R.id.password);
         String passwordStr = password.getText().toString();
 
         String passwordValid = databaseHelper.searchPassword(Integer.parseInt(userIdStr));
@@ -136,12 +138,16 @@ public class Login extends AppCompatActivity {
             String firstName = databaseHelper.searchFirstName(Integer.parseInt(userIdStr));
             ((GlobalVariables) this.getApplication()).setFirstName(firstName);
 
+            // Set Last Name globally
+            String lastName = databaseHelper.searchLastName(Integer.parseInt(userIdStr));
+            ((GlobalVariables) this.getApplication()).setLastName(lastName);
+
             // Turn To Next Page
             Intent startNewActivity = new Intent(this, Questionnaire.class);
             startActivity(startNewActivity);
         }
         else{
-            Toast pw = Toast.makeText(Login.this, "Incorrect Password" + passwordValid, Toast.LENGTH_SHORT);
+            Toast pw = Toast.makeText(Login.this, "Incorrect Password " + passwordValid, Toast.LENGTH_SHORT);
             pw.show();
         }
 
