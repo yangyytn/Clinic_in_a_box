@@ -151,4 +151,9 @@ public class Login extends AppCompatActivity {
         Intent startNewActivity = new Intent(this, SignUp.class);
         startActivity(startNewActivity);
     }
+
+    public void goToTemp(View v){
+        Intent startNewActivity = new Intent(this, Diagnosis.class);
+        startActivity(startNewActivity);
+    }
 }

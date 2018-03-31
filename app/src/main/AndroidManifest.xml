@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.estelleyyy.clinic_in_a_box">
+    <uses-feature android:name="andorid.hardware.usb.host" />
 
     <application
         android:name=".GlobalVariables"
@@ -20,7 +21,13 @@
         <activity android:name=".Login" />
         <activity android:name=".SignUp" />
         <activity android:name=".Questionnaire" />
-        <activity android:name=".Diagnosis" />
+        <activity android:name=".Diagnosis">
+            <intent-filter>
+                    <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+
+
+        </activity>
         <activity android:name=".Finish" />
         <activity android:name=".Diagnosis_BP" />
         <activity android:name=".Diagnosis_BO" />
@@ -32,6 +39,9 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+            android:resource="@xml/device_filter" />
     </application>
 
 </manifest>
