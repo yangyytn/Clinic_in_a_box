@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Cursor result = databaseHelper.getTestData(currentPatientID);
+                        Cursor result = databaseHelper.getAllTestData();
 
                         if (result.getCount() == 0){
                             showMessage("Error", "No Test Data in Database");
