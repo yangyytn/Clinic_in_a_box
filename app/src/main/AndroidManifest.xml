@@ -17,8 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".SignUp" />
+        <activity android:name=".Login" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".SignUp" android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".Questionnaire" />
         <activity android:name=".Diagnosis" />
         <activity android:name=".Finish" />
@@ -28,7 +28,6 @@
             android:name=".TabReportActivity"
             android:label="@string/title_activity_tab_report"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
