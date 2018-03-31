@@ -106,6 +106,15 @@ public class Login extends AppCompatActivity {
         builder.show();
     }
 
+    static boolean isInt(String s)
+    {
+        try
+        { int i = Integer.parseInt(s); return true; }
+
+        catch(NumberFormatException er)
+        { return false; }
+    }
+
     public void goToNext(View v){
         String userIdStr = userId.getText().toString();
         String passwordStr = password.getText().toString();
@@ -114,6 +123,10 @@ public class Login extends AppCompatActivity {
                 (passwordStr.trim().length() == 0)){
             Toast password = Toast.makeText(Login.this, "Please fill in all fields", Toast.LENGTH_SHORT);
             password.show();
+        }
+        else if (!isInt(userIdStr)){
+            Toast notInt = Toast.makeText(Login.this, "UserID should be numbers", Toast.LENGTH_SHORT);
+            notInt.show();
         }
         else {
             String passwordValid = databaseHelper.searchPassword(Integer.parseInt(userIdStr));

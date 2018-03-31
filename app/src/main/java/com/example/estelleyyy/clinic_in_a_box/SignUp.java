@@ -76,8 +76,6 @@ public class SignUp extends AppCompatActivity {
 
                 boolean isInserted = databaseHelper.insertPatient(p);
                 if (isInserted) {
-                    Toast.makeText(SignUp.this, "Data Inserted", Toast.LENGTH_LONG).show();
-
                     AlertDialog.Builder a_builder = new AlertDialog.Builder(SignUp.this);
                     String signUpId = databaseHelper.searchID(firstNameStr);
 
@@ -105,7 +103,6 @@ public class SignUp extends AppCompatActivity {
                     int width  = getResources().getDimensionPixelSize(R.dimen.dialog_width);
                     alert.getButton(AlertDialog.BUTTON_NEUTRAL).setWidth(width);
                     alert.getButton(AlertDialog.BUTTON_NEUTRAL).setHeight(height);
-
                 }
                 else
                     Toast.makeText(SignUp.this,"Data Not Inserted", Toast.LENGTH_LONG).show();
