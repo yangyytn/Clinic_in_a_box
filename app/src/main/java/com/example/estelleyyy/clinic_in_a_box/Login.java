@@ -16,7 +16,6 @@ public class Login extends AppCompatActivity {
     EditText password;
     Button btnViewTest;
     Button btnViewPatient;
-    int currentPatientID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +29,6 @@ public class Login extends AppCompatActivity {
         btnViewTest = (Button) findViewById(R.id.buttonTest);
         btnViewPatient = (Button) findViewById(R.id.buttonPatient);
 
-        currentPatientID = ((GlobalVariables) this.getApplication()).getPatientID();
-
         viewAllTestData();
         viewAllPatients();
     }
@@ -42,21 +39,6 @@ public class Login extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        /*
-                        // New Test Data
-                        TestData t = new TestData();
-                        t.setQ1(3);
-                        t.setQ2(5);
-                        t.setPatientID(currentPatientID); // See Above for declaration
-
-                        boolean isInserted = databaseHelper.insertTest(t);
-                        if (isInserted) {
-                            Toast.makeText(Login.this, "Test Data Inserted", Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            Toast.makeText(Login.this, "Test Data Not Inserted", Toast.LENGTH_LONG).show();
-                        }
-                        */
 
                         Cursor result = databaseHelper.getAllTestData();
                         if (result.getCount() == 0){
@@ -128,27 +110,34 @@ public class Login extends AppCompatActivity {
         String userIdStr = userId.getText().toString();
         String passwordStr = password.getText().toString();
 
-        String passwordValid = databaseHelper.searchPassword(Integer.parseInt(userIdStr));
-
-        if (passwordStr.equals(passwordValid)){
-            // Set PatientID globally
-            ((GlobalVariables) this.getApplication()).setPatientID(Integer.parseInt(userIdStr));
-
-            // Set First Name globally
-            String firstName = databaseHelper.searchFirstName(Integer.parseInt(userIdStr));
-            ((GlobalVariables) this.getApplication()).setFirstName(firstName);
-
-            // Set Last Name globally
-            String lastName = databaseHelper.searchLastName(Integer.parseInt(userIdStr));
-            ((GlobalVariables) this.getApplication()).setLastName(lastName);
-
-            // Turn To Next Page
-            Intent startNewActivity = new Intent(this, Questionnaire.class);
-            startActivity(startNewActivity);
+        if ((userIdStr.trim().length() == 0) ||
+                (passwordStr.trim().length() == 0)){
+            Toast password = Toast.makeText(Login.this, "Please fill in all fields", Toast.LENGTH_SHORT);
+            password.show();
         }
-        else{
-            Toast pw = Toast.makeText(Login.this, "Incorrect Password " + passwordValid, Toast.LENGTH_SHORT);
-            pw.show();
+        else {
+            String passwordValid = databaseHelper.searchPassword(Integer.parseInt(userIdStr));
+
+            if (passwordStr.equals(passwordValid)){
+                // Set PatientID globally
+                ((GlobalVariables) this.getApplication()).setPatientID(Integer.parseInt(userIdStr));
+
+                // Set First Name globally
+                String firstName = databaseHelper.searchFirstName(Integer.parseInt(userIdStr));
+                ((GlobalVariables) this.getApplication()).setFirstName(firstName);
+
+                // Set Last Name globally
+                String lastName = databaseHelper.searchLastName(Integer.parseInt(userIdStr));
+                ((GlobalVariables) this.getApplication()).setLastName(lastName);
+
+                // Turn To Next Page
+                Intent startNewActivity = new Intent(this, Questionnaire.class);
+                startActivity(startNewActivity);
+            }
+            else{
+                Toast pw = Toast.makeText(Login.this, "Incorrect Password ", Toast.LENGTH_SHORT);
+                pw.show();
+            }
         }
 
     }
