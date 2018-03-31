@@ -19,7 +19,7 @@ import android.widget.Adapter;
 public class SignUp extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
-    Spinner Agesets = (Spinner) findViewById(R.id.spinner);
+    Spinner Agesets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +28,8 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         //set variables//
-
-        String[] ages = new String[]{"<1", "1", "2", "3", "4", "5"};
+        Agesets = (Spinner) findViewById(R.id.spinner);
+        String[] ages = new String[]{"Less than 12 months", "1", "2", "3", "4", "5"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, ages);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -40,13 +40,13 @@ public class SignUp extends AppCompatActivity {
         if (v.getId() == R.id.buttonSignUp){
             EditText firstName = (EditText) findViewById(R.id.firstName);
             EditText lastName = (EditText) findViewById(R.id.userID);
-            EditText age = (EditText) findViewById(R.id.age);
+            Spinner age = (Spinner) findViewById(R.id.spinner);
             EditText pw = (EditText) findViewById(R.id.password);
             EditText pw2 = (EditText) findViewById(R.id.password2);
 
             String firstNameStr = firstName.getText().toString();
             String lastNameStr = lastName.getText().toString();
-            String ageStr = age.getText().toString();
+            String ageStr = age.getSelectedItem().toString();
             String pwStr = pw.getText().toString();
             String pw2Str = pw2.getText().toString();
 
