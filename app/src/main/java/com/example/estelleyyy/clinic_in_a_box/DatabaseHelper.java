@@ -214,6 +214,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    // Get Test Data by patientID
+    public Cursor getTestData(int patientID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor result = db.rawQuery("SELECT * from  " + TABLE_NAME_TEST + " where PatientID = " + patientID, null);
+        return result;
+    }
 
     //Insert Test Data
     public boolean insertTest(TestData testData){
