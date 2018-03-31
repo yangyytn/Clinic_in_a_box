@@ -50,14 +50,16 @@ public class Tab_Suggestion extends Fragment {
             System.out.println("Currently, the patient has a moderate risk percentage of Sepsis: " + risk + "%. ");
             System.out.println("If possible, the patient should go for a thorough examination.");
 
-            System.out.println("There are 2 important factors that he/she needs to be aware of: ");
+            System.out.println("Please take good care of the patient to avoid aggravation, as a weakened immune system will likely get infected by Sepsis.");
 
-            System.out.println("1. Please make sure the blood oxygen is maintained at a normal level: ");
-            System.out.println("Blood Oxygen > 92% for children older than 1 year old.");
-            System.out.println("Blood Oxygen > 90% for infants less than 1 year old.");
+            System.out.println("1. Get vaccinated: Thirty-five percent of sepsis cases in the CDC study stemmed from pneumonia. ");
+            System.out.println("Annual flu shots against pneumonia can prevent respiratory infections that can sometimes turn septic. ");
 
-            System.out.println("2. Please make sure the patient does not have skin problems.");
-            System.out.println("If the patient is having aggravated symptoms with worse health, please go to the local hospital.");
+            System.out.println("2. Act fast: If the contact a healthcare provider if the infection is gotten worse.");
+
+            System.out.println("3. Please make sure the patient does not have skin problems.");
+
+            System.out.println("If needed, go to the local hospital for more detailed tests.");
         }
 
     }

@@ -14,7 +14,7 @@
         android:layout_marginBottom="24dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/news_cycle"
-        android:text="Hello, welcome to the remote clinic!"
+
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textSize="40sp"

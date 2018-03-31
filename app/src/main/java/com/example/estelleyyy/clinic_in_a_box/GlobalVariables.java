@@ -22,8 +22,8 @@ public class GlobalVariables extends Application {
         return firstName;
     }
 
-    public void setFirstName(String lastName) {
-        this.lastName = lastName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

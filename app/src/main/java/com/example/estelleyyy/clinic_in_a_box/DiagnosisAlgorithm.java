@@ -8,12 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 
 
+
+
 public class DiagnosisAlgorithm extends AppCompatActivity {
 
     static Context context;
     public DiagnosisAlgorithm(Context c) {
         context = c;
     }
+    public static final int TEST_CASE = 6;
 
     // todo: connect and get test results from Arduino + MySignal
     public void GetTestValue_bloodPressure(double[] BloodPressure) {
@@ -21,7 +24,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
         // BloodPressure[0] = Systolic Pressure
         // BloodPressure[1] = Diastolic Pressure
 
-        int testcase = 1;
+        int testcase = TEST_CASE;
 
         switch(testcase) {
             case 1:
@@ -71,7 +74,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
 
         double BloodOxy = 0;
 
-        int testcase = 1;
+        int testcase = TEST_CASE;
 
         switch(testcase) {
             case 1:
@@ -113,7 +116,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
     public double GetTestValue_temp() {
 
         double Temperature = 0;
-        int testcase = 1;
+        int testcase = TEST_CASE;
 
         switch(testcase) {
             case 1:
