@@ -345,9 +345,14 @@ public class Questionnaire extends AppCompatActivity {
         t.setQ4(Qresult[3]);
         t.setQ5(Qresult[4]);
 
-        //todo: push age to database
-        // set age
-        // t.setage(Qresult[5])
+        // push age
+        t.setTestAge(Qresult[5]);
+
+        // push test Pid
+        int Pid = ((GlobalVariables) this.getApplication()).getPatientID();
+        t.setPatientID(Pid);
+
+
 
 
         boolean isInserted = databaseHelper.insertTest(t);
