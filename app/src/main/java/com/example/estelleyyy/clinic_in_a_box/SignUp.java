@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
-import android.widget.Adapter;
 
 /**
  * Created by wenjiazhang on 2018-03-11.
@@ -85,6 +84,7 @@ public class SignUp extends AppCompatActivity {
                     // Set PatientID and FirstName globally
                     ((GlobalVariables) this.getApplication()).setPatientID(Integer.parseInt(signUpId));
                     ((GlobalVariables) this.getApplication()).setFirstName(firstNameStr);
+                    ((GlobalVariables) this.getApplication()).setLastName(lastNameStr);
 
                     a_builder.setMessage("You have been signed up. \n Your Login Number is " + signUpId + ". \n Click OK to login in.")
                            // .setCancelable(false)
