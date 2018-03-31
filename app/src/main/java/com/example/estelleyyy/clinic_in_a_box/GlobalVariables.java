@@ -8,6 +8,7 @@ import android.app.Application;
 
 public class GlobalVariables extends Application {
     private int patientID;
+    private String firstName;
 
     public int getPatientID() {
         return patientID;
@@ -15,6 +16,14 @@ public class GlobalVariables extends Application {
 
     public void setPatientID(int patientID) {
         this.patientID = patientID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
 
