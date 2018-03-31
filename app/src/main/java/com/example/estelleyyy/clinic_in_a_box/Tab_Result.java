@@ -18,4 +18,12 @@ public class Tab_Result extends Fragment {
         View rootView = inflater.inflate(R.layout.result, container, false);
         return rootView;
     }
+
+
+    // todo: connect this to the XML!!!
+    // todo: use the below 2 lines for results display!!!!!!
+    //int[] Qresults = ((GlobalVariables) this.getActivity().getApplication()).getQresult();
+    //CurrentTestResult(Qresults);
+
+
 }

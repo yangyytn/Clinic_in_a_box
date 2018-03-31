@@ -255,6 +255,12 @@ public class Questionnaire extends AppCompatActivity {
         for (int i = 0; i<QuestionAnswers.length; i++) {
             QuestionAnswers[i] = Qresults[i];
         }
+
+        // push Qanswers to global variables
+        ((GlobalVariables) this.getApplication()).setQresult(QuestionAnswers);
+        // push age to global variables:
+        ((GlobalVariables) this.getApplication()).setAge(Qresults[5]);
+
         doTest = contains(QuestionAnswers, 1);
         System.out.println("The doTest flag is: " + doTest);
 
@@ -300,6 +306,7 @@ public class Questionnaire extends AppCompatActivity {
         // set age
         // t.setage(Qresult[5])
 
+
         boolean isInserted = databaseHelper.insertTest(t);
         if (isInserted) {
             Toast.makeText(Questionnaire.this, "Test Data Inserted", Toast.LENGTH_LONG).show();
@@ -311,7 +318,7 @@ public class Questionnaire extends AppCompatActivity {
 
     }
 
-    // test: need to move to after physical tests
+    // todo: test: need to be removed after
     void AlgorithmTest(int[] Qresult) {
 
         double result;
@@ -321,7 +328,7 @@ public class Questionnaire extends AppCompatActivity {
         //Calling function from another class .
         result = FN.RiskPercentAlg(Qresult);
         System.out.println("The risk percentage is: " + result + "%. ");
-        if (result<30) {
+        if (result<25) {
             System.out.println("The patient has a relatively low chance of getting Sepsis.");
         }
         else if (result>70) {
