@@ -3,6 +3,7 @@ package com.example.estelleyyy.clinic_in_a_box;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -85,7 +86,7 @@ public class SignUp extends AppCompatActivity {
                     ((GlobalVariables) this.getApplication()).setPatientID(Integer.parseInt(signUpId));
                     ((GlobalVariables) this.getApplication()).setFirstName(firstNameStr);
 
-                    a_builder.setMessage("You have been signed up. \n Your Login Number is " + signUpId + ".")
+                    a_builder.setMessage("You have been signed up. \n Your Login Number is " + signUpId + ". \n Click OK to login in.")
                            // .setCancelable(false)
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
@@ -98,7 +99,12 @@ public class SignUp extends AppCompatActivity {
                     AlertDialog alert = a_builder.create();
                     alert.setTitle("Confirmation");
                     alert.show();
-
+                    alert.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#ffffff"));
+                    alert.getButton(AlertDialog.BUTTON_NEUTRAL).setBackgroundColor(Color.parseColor("#bf0913"));
+                    int height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
+                    int width  = getResources().getDimensionPixelSize(R.dimen.dialog_width);
+                    alert.getButton(AlertDialog.BUTTON_NEUTRAL).setWidth(width);
+                    alert.getButton(AlertDialog.BUTTON_NEUTRAL).setHeight(height);
 
                 }
                 else
