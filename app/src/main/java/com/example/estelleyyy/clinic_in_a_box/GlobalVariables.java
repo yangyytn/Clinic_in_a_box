@@ -8,6 +8,11 @@ import android.app.Application;
 
 public class GlobalVariables extends Application {
     private int patientID;
+    private float tempc;
+    private float spo2;
+    private float bp_sys;
+    private float bp_dia;
+
     private String firstName, lastName;
 
     public int getPatientID() {
@@ -82,4 +87,9 @@ public class GlobalVariables extends Application {
         this.risk = risk;
     }
 
+
+    public void temperature(float tempc) {this.tempc = tempc;}
+    public void BP_SYS(float bp_sys) {this.bp_sys = bp_sys;}
+    public void BP_DIA(float bp_dia) {this.bp_dia = bp_dia;}
+    public void SPO2(float spo2) {this.temp = spo2;}
 }
