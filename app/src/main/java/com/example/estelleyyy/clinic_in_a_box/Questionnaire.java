@@ -82,7 +82,7 @@ public class Questionnaire extends AppCompatActivity {
 
                     default:
                         //error: should not happen
-                        System.out.println("Error in selection.");
+                        System.out.println("Error in selection1.");
                         Qresults[0] = -1;
                         break;
                 }
@@ -103,7 +103,7 @@ public class Questionnaire extends AppCompatActivity {
 
                     default:
                         //error: should not happen
-                        System.out.println("Error in selection.");
+                        System.out.println("Error in selection2.");
                         Qresults[1] = -1;
                         break;
                 }
@@ -123,7 +123,7 @@ public class Questionnaire extends AppCompatActivity {
 
                     default:
                         //error: should not happen
-                        System.out.println("Error in selection.");
+                        System.out.println("Error in selection3.");
                         Qresults[2] = -1;
                         break;
                 }
@@ -144,7 +144,7 @@ public class Questionnaire extends AppCompatActivity {
 
                     default:
                         //error: should not happen
-                        System.out.println("Error in selection.");
+                        System.out.println("Error in selection4.");
                         Qresults[3] = -1;
                         break;
                 }
@@ -170,15 +170,26 @@ public class Questionnaire extends AppCompatActivity {
 
                     default:
                         //error: should not happen
-                        System.out.println("Error in selection.");
+                        System.out.println("Error in selection5.");
                         Qresults[4] = -1;
                         break;
                 }
 
 
-                Spinner age = (Spinner) findViewById(R.id.spinner);
+                Spinner age = findViewById(R.id.spinner);
                 String ageStr = age.getSelectedItem().toString();
-                if(ageStr != null && !ageStr.isEmpty()) {
+                int ageInt;
+
+                if (ageStr.equals("Less than 12 months")) {
+                    ageInt = 0;
+                }
+                else ageInt = Integer.parseInt(ageStr);
+                Qresults[5] = ageInt;
+
+                System.out.println("age : " +ageInt);
+
+
+                /*if(ageStr != null && !ageStr.isEmpty()) {
                     int ageInt = Integer.parseInt(ageStr);
                     if (ageInt<=5 && ageInt>=0) {
                         Qresults[5] = ageInt;
@@ -193,7 +204,7 @@ public class Questionnaire extends AppCompatActivity {
                 // empty input
                 else {
                     Qresults[5] = -1;
-                }
+                }*/
 
 
 
@@ -270,6 +281,7 @@ public class Questionnaire extends AppCompatActivity {
         // push Qanswers to global variables
         ((GlobalVariables) this.getApplication()).setQresult(QuestionAnswers);
         // push age to global variables:
+        System.out.println("before pushing to global variable, check age : " + Qresults[5]);
         ((GlobalVariables) this.getApplication()).setAge(Qresults[5]);
 
         doTest = contains(QuestionAnswers, 1);
