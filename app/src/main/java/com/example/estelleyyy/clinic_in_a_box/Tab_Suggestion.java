@@ -53,7 +53,7 @@ public class Tab_Suggestion extends Fragment {
             System.out.println("Please take good care of the patient to avoid aggravation, as a weakened immune system will likely get infected by Sepsis.");
 
             System.out.println("1. Get vaccinated: Thirty-five percent of sepsis cases in the CDC study stemmed from pneumonia. ");
-            System.out.println("Annual flu shots can also prevent respiratory infections that can sometimes turn septic. ");
+            System.out.println("Annual flu shots against pneumonia can prevent respiratory infections that can sometimes turn septic. ");
 
             System.out.println("2. Act fast: If the contact a healthcare provider if the infection is gotten worse.");
 

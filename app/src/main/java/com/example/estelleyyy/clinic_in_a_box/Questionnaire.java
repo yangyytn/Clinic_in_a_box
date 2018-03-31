@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.ArrayAdapter;
 
 
@@ -37,6 +38,16 @@ public class Questionnaire extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, ages);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         AgeSets.setAdapter(adapter);
+
+
+        // fetch the global variable: first name; added into the xml
+        String output=((GlobalVariables) this.getApplication()).getFirstName();
+        System.out.println(output);
+        // globally
+        TextView textView1;
+        //in your OnCreate() method
+        textView1  = (TextView)findViewById(R.id.questitle);
+        textView1.setText(output);
 
         addListenerOnButton();
     }
