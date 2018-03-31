@@ -41,8 +41,17 @@ public class Questionnaire extends AppCompatActivity {
 
 
         // fetch the global variable: first name; added into the xml
-        String output=((GlobalVariables) this.getApplication()).getFirstName();
-        System.out.println(output);
+        String output1=((GlobalVariables) this.getApplication()).getFirstName();
+        output1 = output1.substring(0, 1).toUpperCase() + output1.substring(1);
+        String output = "";
+        if (output1.length()<10) {
+            output="Hello, " + output1 + ". Welcome to the remote clinic!";
+            System.out.println(output);
+        }
+        else {
+            output="Hello, welcome to the remote clinic!";
+        }
+
         // globally
         TextView textView1;
         //in your OnCreate() method
