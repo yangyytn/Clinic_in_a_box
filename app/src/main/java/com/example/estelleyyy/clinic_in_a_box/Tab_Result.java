@@ -23,8 +23,8 @@ public class Tab_Result extends Fragment {
         // connect this to the XML!!!
         // use the below 2 lines for results display!!!!!!
 
-        int[] Qresults = new int[5];
-        ((GlobalVariables) this.getActivity().getApplication()).getQresult(Qresults);
+        int[] Qresults;
+        Qresults = ((GlobalVariables) this.getActivity().getApplication()).getQresult();
 
 
         for (int i =0; i<5; i++) {
@@ -38,6 +38,7 @@ public class Tab_Result extends Fragment {
 
         if (Result<25) {
             output2+="Low Risk Percentage";
+
         }
         else if (Result>70) {
             output2+="High Risk Percentage";
@@ -64,6 +65,21 @@ public class Tab_Result extends Fragment {
 
         TextView textView2 = rootView.findViewById(R.id.textView12);
         textView2.setText(output2);
+
+        if (Result<25) {
+            textView1.setTextColor(0xff006600);     // green
+            textView2.setTextColor(0xff006600);
+        }
+        else if (Result>70) {
+            textView1.setTextColor(0xffcc0000);     // red
+            textView2.setTextColor(0xffcc0000);
+        }
+        else {
+            textView1.setTextColor(0xffe65c00);     //orange
+            textView2.setTextColor(0xffe65c00);
+        }
+
+
 
         TextView textView3 = rootView.findViewById(R.id.textView13);
         textView3.setText(test1);
