@@ -61,7 +61,7 @@ public class GlobalVariables extends Application {
     //two values for BP: systalic, dia...
     private double[] BloodPressure = new double[2];
     private double oxygen;
-    private float armpit;
+    private double armpit;
 
     public double[] getBloodPressure() {
         return BloodPressure;
@@ -75,8 +75,8 @@ public class GlobalVariables extends Application {
         this.oxygen = oxygen;
     }
 
-    public float getTemp() { return armpit; }
-    public void setTemp(float temp) {
+    public double getTemp() { return armpit; }
+    public void setTemp(double temp) {
         this.armpit = temp;
     }
 

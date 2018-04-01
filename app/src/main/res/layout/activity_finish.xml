@@ -7,12 +7,37 @@
     android:background="@color/colorAccent"
     tools:context="com.example.estelleyyy.clinic_in_a_box.Finish">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="286dp"
+        android:layout_height="533dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="104dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/logo" />
+
+
     <Button
         android:id="@+id/button6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="27dp"
-        android:text="View My Profile"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/red"
+        android:elevation="0dp"
+        android:onClick="goToQuestionnaire"
+        android:text="Test Again"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        android:visibility="visible"
         app:layout_constraintBaseline_toBaselineOf="@+id/button7"
         app:layout_constraintEnd_toStartOf="@+id/button7"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -22,11 +47,20 @@
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="193dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="232dp"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="@color/red"
+        android:elevation="0dp"
         android:onClick="goToNext"
         android:text="Log Me out"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button6" />
+
+
+
 </android.support.constraint.ConstraintLayout>

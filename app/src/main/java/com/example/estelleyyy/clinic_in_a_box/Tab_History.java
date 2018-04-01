@@ -4,6 +4,7 @@ package com.example.estelleyyy.clinic_in_a_box;
  * Created by estelleyyy on 2018-03-11.
  */
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -70,5 +71,6 @@ public class Tab_History extends Fragment {
         TextView P1_textView = rootView.findViewById(R.id.textView17);
         P1_textView.setText(P1_output);
     }
+
 
 }
