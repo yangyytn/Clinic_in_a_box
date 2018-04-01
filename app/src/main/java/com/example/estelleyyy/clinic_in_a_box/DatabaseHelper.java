@@ -182,7 +182,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public String searchLastName(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT _id, lastname from " + TABLE_NAME_PATIENT ;
+        String query = "SELECT _id, lastname FROM " + TABLE_NAME_PATIENT ;
         Cursor cursor = db.rawQuery(query, null);
 
         String a,b;
@@ -204,20 +204,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Get all patients
     public Cursor getAllPatients(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor result = db.rawQuery("SELECT * from  " + TABLE_NAME_PATIENT, null);
+        Cursor result = db.rawQuery("SELECT * FROM  " + TABLE_NAME_PATIENT, null);
         return result;
     }
 
     public Cursor getAllTestData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor result = db.rawQuery("SELECT * from  " + TABLE_NAME_TEST, null);
+        Cursor result = db.rawQuery("SELECT * FROM  " + TABLE_NAME_TEST, null);
         return result;
     }
 
     // Get Test Data by patientID
     public Cursor getTestData(int patientID){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor result = db.rawQuery("SELECT * from  " + TABLE_NAME_TEST + " where PatientID = " + patientID, null);
+        Cursor result = db.rawQuery("SELECT * FROM  " + TABLE_NAME_TEST + " WHERE PatientID = " + patientID + " LIMIT 5", null);
         return result;
     }
 
