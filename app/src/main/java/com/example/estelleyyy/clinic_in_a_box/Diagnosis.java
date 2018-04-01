@@ -24,6 +24,7 @@ import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ public class Diagnosis extends AppCompatActivity {
     UsbDeviceConnection connection;
     List temperature;
     TextView testdisplay;
+    List<String> armpit;
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
@@ -48,13 +50,14 @@ public class Diagnosis extends AppCompatActivity {
                 data = new String(arg0, "UTF-8");
                 data.concat("/n");
                 tvAppend(testdisplay, data);
+                //armpit.add(data);
+
                 //temperature.add(data);
                 //testdisplay.setText(data);
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-
 
         }
     };
@@ -76,9 +79,8 @@ public class Diagnosis extends AppCompatActivity {
                             serialPort.setParity(UsbSerialInterface.PARITY_NONE);
                             serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
                             serialPort.read(mCallback);
-                            //testdisplay.setText("connected");
                             tvAppend(testdisplay,"Serial Connection Opened!\n");
-
+                            onClickSend("temp");
                         } else {
                             Log.d("SERIAL", "PORT NOT OPEN");
                         }
@@ -90,6 +92,7 @@ public class Diagnosis extends AppCompatActivity {
                 }
             } else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_ATTACHED)) {
                 onClickStart(startButton);
+                //onClickSend("temp");
             } //else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) {
                 //onClickStop(stopButton);
 
@@ -104,10 +107,8 @@ public class Diagnosis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diagnosis);
         testdisplay = (TextView) findViewById(R.id.textView3);
-
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
-
-
+        armpit = new ArrayList<>();
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
@@ -133,6 +134,7 @@ public class Diagnosis extends AppCompatActivity {
                     PendingIntent pi = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
                     usbManager.requestPermission(device, pi);
                 keep = false;
+                //onClickSend("temp");
                 //} else {
                   //connection = null;
                 //device = null;
@@ -152,7 +154,11 @@ public class Diagnosis extends AppCompatActivity {
         startActivity(startNewActivity);
     }
 
+    public void onClickSend(String option) {
+        serialPort.write(option.getBytes());
+        //tvAppend(textView, "\nData Sent : " + string + "\n");
 
+    }
 
     private void tvAppend(TextView tv, CharSequence text) {
         final TextView ftv = tv;
