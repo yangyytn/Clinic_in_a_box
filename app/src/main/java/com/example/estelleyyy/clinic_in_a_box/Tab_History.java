@@ -45,27 +45,30 @@ public class Tab_History extends Fragment {
         }
         StringBuffer buffer = new StringBuffer();
 
-        while (result.moveToNext()) {
-            buffer.append("Test Id :" + result.getString(0) + "\n");
-            buffer.append("Patient ID :" + result.getString(1) + "\n");
-            buffer.append("Test Date :" + result.getString(2) + "\n");
-            buffer.append("Test Age :" + result.getString(3) + "\n");
-            buffer.append("Q1 :" + result.getString(4) + "\n");
-            buffer.append("Q2 :" + result.getString(5) + "\n");
-            buffer.append("Q3 :" + result.getString(6) + "\n");
-            buffer.append("Q4 :" + result.getString(7) + "\n");
-            buffer.append("Q5 :" + result.getString(8) + "\n");
-            buffer.append("P1 :" + result.getString(9) + "\n");
-            buffer.append("P2 :" + result.getString(10) + "\n");
-            buffer.append("P3 :" + result.getString(11) + "\n");
-            buffer.append("Risk :" + result.getString(12) + "\n");
+        StringBuffer P1_buffer = new StringBuffer();
 
+        while (result.moveToNext()) {
+            buffer.append("Test Id : " + result.getString(0) + "\n");
+            buffer.append("Patient ID : " + result.getString(1) + "\n");
+            buffer.append("Test Date : " + result.getString(2) + "\n");
+            buffer.append("Test Age : " + result.getString(3) + "\n");
+            buffer.append("P1 : " + result.getString(9) + "\n");
+            buffer.append("P2 : " + result.getString(10) + "\n");
+            buffer.append("P3 : " + result.getString(11) + "\n");
+            buffer.append("Risk : " + result.getString(12) + "\n");
+
+            P1_buffer.append("P1 : " + result.getString(9) + "\n");
         }
 
         String output = buffer.toString();
 
-        TextView textView1 = rootView.findViewById(R.id.textView12);
+        String P1_output = P1_buffer.toString();
+
+        TextView textView1 = rootView.findViewById(R.id.textView11);
         textView1.setText(output);
+
+        TextView P1_textView = rootView.findViewById(R.id.textView17);
+        P1_textView.setText(P1_output);
     }
 
 }
