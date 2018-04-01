@@ -44,8 +44,8 @@ public class GlobalVariables extends Application {
     private int[] Qresult = new int[5];
     private int age;
 
-    public void getQresult(int[] QResult) {
-        QResult = Qresult;
+    public int[] getQresult() {
+        return Qresult;
     }
     public void setQresult(int[] Qresult) {
         this.Qresult = Qresult;
