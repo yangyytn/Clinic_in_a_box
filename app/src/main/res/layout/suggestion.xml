@@ -7,12 +7,25 @@
     android:background="@color/colorAccent"
     tools:context="com.example.estelleyyy.clinic_in_a_box.TabReportActivity">
 
+
+    <ImageView
+        android:id="@+id/imageViewA"
+        android:layout_width="wrap_content"
+        android:layout_height="911dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:layout_constraintVertical_bias="0.931"
+        app:srcCompat="@drawable/suggestion_low" />
+
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="Suggestion"
+        android:text="Suggestion: 记得换个图"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout"
         tools:layout_constraintLeft_creator="1"

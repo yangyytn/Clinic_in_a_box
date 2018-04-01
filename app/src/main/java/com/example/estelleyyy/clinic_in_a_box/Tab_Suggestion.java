@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class Tab_Suggestion extends Fragment {
@@ -17,18 +19,32 @@ public class Tab_Suggestion extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.suggestion, container, false);
+
+        double risk = ((GlobalVariables) this.getActivity().getApplication()).getRisk();
+
+        ImageView Image = rootView.findViewById(R.id.imageViewA);
+
+        if (risk < 25) {
+            Image.setImageDrawable(getResources().getDrawable(R.drawable.suggestion_low));
+        }
+
+        else if (risk > 70) {
+            Image.setImageDrawable(getResources().getDrawable(R.drawable.suggestion_high));
+        }
+
+        else {
+            Image.setImageDrawable(getResources().getDrawable(R.drawable.suggestion_moderate));
+        }
+
+
         return rootView;
     }
 
 
-    // todo: connect this to the XML!!!
-    // todo: use the below 2 lines to print suggestions!
-    //double risk = ((GlobalVariables) this.getActivity().getApplication()).getTemp();
-    //Suggestions(risk);
-
-
+    // todo: add these printouts to the suggestion images
     // function to display suggestions
     void Suggestions(double risk) {
+
 
         if (risk < 25) {
             System.out.println("Currently, the patient has a low risk percentage of Sepsis: " + risk + "%. ");
