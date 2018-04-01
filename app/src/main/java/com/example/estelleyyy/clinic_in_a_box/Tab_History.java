@@ -35,9 +35,9 @@ public class Tab_History extends Fragment {
     }
 
     public void viewHistoryTestData(View rootView){
-        ((GlobalVariables) this.getActivity().getApplication()).getPatientID();
+        int pid = ((GlobalVariables) this.getActivity().getApplication()).getPatientID();
 
-        Cursor result = databaseHelper.getAllTestData();
+        Cursor result = databaseHelper.getTestData(pid);
 
         if (result.getCount() == 0){
             showMessage("Error", "No Test Data in Database");
@@ -64,7 +64,7 @@ public class Tab_History extends Fragment {
 
         String output = buffer.toString();
 
-        TextView textView1 = rootView.findViewById(R.id.textView11);
+        TextView textView1 = rootView.findViewById(R.id.textView12);
         textView1.setText(output);
     }
 
