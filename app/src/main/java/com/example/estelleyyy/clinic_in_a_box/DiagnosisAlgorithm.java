@@ -157,7 +157,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
 
 
 
-    public double RiskPercentAlg(int[] Qresult) {
+    public double RiskPercentAlg(int[] Qresult, int age) {
 
         // based on questionnaire answers:
         int Social_response = Qresult[0];
@@ -165,7 +165,7 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
         int hands_feet = Qresult[2];
         int grunting = Qresult[3];
         int skin = Qresult[4];
-        int age = Qresult[5];
+                //((GlobalVariables) this.getApplication()).getAge();
         double risk = 0;
 
         int weight = 0;

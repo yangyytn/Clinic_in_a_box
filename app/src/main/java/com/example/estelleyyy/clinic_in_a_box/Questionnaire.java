@@ -249,6 +249,9 @@ public class Questionnaire extends AppCompatActivity {
                 // only when all questions are answered, shall we proceed to the next step
                 if ((selectionAll == true) && (Qresults[5] != -2)) {
 
+                    System.out.println("pass here!!\n\n\n\n\n\n\n\n\n!!!!!!");
+
+
                     // store the answers
                     PushToDatabase(Qresults);
 
@@ -260,7 +263,7 @@ public class Questionnaire extends AppCompatActivity {
                         goToFinish(v);
                     } else {*/
                         // when "Submit" clicked, last step -> switch to the next page
-                    AlgorithmTest(Qresults);
+                    //AlgorithmTest(Qresults);
                     goToNext(v);
                     //}
 
@@ -297,12 +300,6 @@ public class Questionnaire extends AppCompatActivity {
         for (int i = 0; i<QuestionAnswers.length; i++) {
             QuestionAnswers[i] = Qresults[i];
         }
-
-        // push Qanswers to global variables
-        ((GlobalVariables) this.getApplication()).setQresult(QuestionAnswers);
-        // push age to global variables:
-        System.out.println("before pushing to global variable, check age : " + Qresults[5]);
-        ((GlobalVariables) this.getApplication()).setAge(Qresults[5]);
 
         doTest = contains(QuestionAnswers, 1);
         System.out.println("The doTest flag is: " + doTest);
@@ -345,9 +342,12 @@ public class Questionnaire extends AppCompatActivity {
         t.setQ4(Qresult[3]);
         t.setQ5(Qresult[4]);
 
-        //todo: push age to database
-        // set age
-        // t.setage(Qresult[5])
+        // push age
+        t.setTestAge(Qresult[5]);
+
+        // push test Pid
+        int Pid = ((GlobalVariables) this.getApplication()).getPatientID();
+        t.setPatientID(Pid);
 
 
         boolean isInserted = databaseHelper.insertTest(t);
@@ -359,17 +359,32 @@ public class Questionnaire extends AppCompatActivity {
         }
 
 
+        int[] QuestionAnswers = new int[5];
+        for (int i=0; i<5; i++) {
+            QuestionAnswers[i] = Qresult[i];
+        }
+        // push Qanswers to global variables
+        ((GlobalVariables) this.getApplication()).setQresult(QuestionAnswers);
+        // push age to global variables:
+        System.out.println("before pushing to global variable, check age : " + Qresult[5]);
+        ((GlobalVariables) this.getApplication()).setAge(Qresult[5]);
+
+        int x = ((GlobalVariables) this.getApplication()).getAge();
+        System.out.println("\n\n\n\n\n\n\n\n\n!!!!!!!!\n\n\nsee this age: " + x);
+
+
+
     }
 
     // todo: test: need to be removed after
-    void AlgorithmTest(int[] Qresult) {
+   /* void AlgorithmTest(int[] Qresult) {
 
         double result;
         //Creating function calling class object.
         DiagnosisAlgorithm FN = new DiagnosisAlgorithm(DiagnosisAlgorithm.context);
 
         //Calling function from another class .
-        result = FN.RiskPercentAlg(Qresult);
+        result = FN.RiskPercentAlg(Qresult, age);
         System.out.println("The risk percentage is: " + result + "%. ");
         if (result<25) {
             System.out.println("The patient has a relatively low chance of getting Sepsis.");
@@ -384,7 +399,7 @@ public class Questionnaire extends AppCompatActivity {
         }
 
 
-    }
+    }*/
 
 
 }

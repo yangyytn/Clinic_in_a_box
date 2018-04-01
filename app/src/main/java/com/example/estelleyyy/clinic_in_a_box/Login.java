@@ -16,7 +16,6 @@ public class Login extends AppCompatActivity {
     EditText password;
     Button btnViewTest;
     Button btnViewPatient;
-    int currentPatientID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,6 @@ public class Login extends AppCompatActivity {
         password = (EditText)findViewById(R.id.password);
         btnViewTest = (Button) findViewById(R.id.buttonTest);
         btnViewPatient = (Button) findViewById(R.id.buttonPatient);
-        currentPatientID = ((GlobalVariables) this.getApplication()).getPatientID();
 
         viewAllTestData();
         viewAllPatients();
@@ -41,7 +39,7 @@ public class Login extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Cursor result = databaseHelper.getTestData(currentPatientID);
+                        Cursor result = databaseHelper.getAllTestData();
 
                         if (result.getCount() == 0){
                             showMessage("Error", "No Test Data in Database");
