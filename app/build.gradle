@@ -27,4 +27,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:26.1.0'
     implementation files('libs/usbserial.jar')
+    compile 'com.jjoe64:graphview:4.2.1'
+
 }

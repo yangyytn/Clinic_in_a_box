@@ -80,7 +80,7 @@ public class Diagnosis extends AppCompatActivity {
                             serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
                             serialPort.read(mCallback);
                             tvAppend(testdisplay,"Serial Connection Opened!\n");
-                            onClickSend("temp");
+                            //onClickSend("temp");
                         } else {
                             Log.d("SERIAL", "PORT NOT OPEN");
                         }
