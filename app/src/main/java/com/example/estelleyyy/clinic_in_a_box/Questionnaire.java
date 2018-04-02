@@ -37,8 +37,8 @@ public class Questionnaire extends AppCompatActivity {
         AgeSets = (Spinner) findViewById(R.id.spinner);
         String[] ages = new String[]{"Less than 12 months", "1", "2", "3", "4", "5"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, ages);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, ages);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         AgeSets.setAdapter(adapter);
 
 

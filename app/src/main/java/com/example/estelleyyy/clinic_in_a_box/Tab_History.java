@@ -132,7 +132,7 @@ public class Tab_History extends Fragment {
         gridRender.setGridColor(Color.parseColor("#ea8383"));
 
         graph.addSeries(seriesRisk);
-        graph.setTitle("Risk"); //Blood oxygen saturation;  Blood pressure; Armpit Temperature
+        //graph.setTitle("Risk"); //Blood oxygen saturation;  Blood pressure; Armpit Temperature
         graph.setTitleColor(Color.parseColor("#bf0913"));
 
     }

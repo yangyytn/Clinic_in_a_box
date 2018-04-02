@@ -30,7 +30,7 @@
         android:layout_height="121dp"
         android:layout_marginBottom="14dp"
         android:gravity="center"
-        android:text="Please place the temperature sensor under the armpit and then press"
+        android:text="Please put the blood pressure bound around the lower leg and then press "
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintLeft_toLeftOf="parent"

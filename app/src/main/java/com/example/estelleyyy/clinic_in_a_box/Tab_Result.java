@@ -34,18 +34,18 @@ public class Tab_Result extends Fragment {
 
         double Result = CurrentTestResult(Qresults);
 
-        String output1 =Result + "%";
+        String output1 = (int) Result + "%";
         String output2="";
 
         if (Result<25) {
-            output2+="Low Risk Percentage";
+            output2+="Low Risk";
 
         }
         else if (Result>70) {
-            output2+="High Risk Percentage";
+            output2+="High Risk";
         }
         else {
-            output2+="Moderate Risk Percentage";
+            output2+="Moderate Risk";
         }
 
         //display the physical test measurements:
@@ -90,6 +90,7 @@ public class Tab_Result extends Fragment {
 
         TextView textView5 = rootView.findViewById(R.id.textView15);
         textView5.setText(test3);
+
 
         return rootView;
     }
