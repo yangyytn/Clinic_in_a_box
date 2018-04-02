@@ -79,14 +79,15 @@ public class Tab_History extends Fragment {
             buffer.append("Patient ID : " + result.getString(1) + "\n");
             buffer.append("Test Date : " + result.getString(2) + "\n");
             buffer.append("Test Age : " + result.getString(3) + "\n");
-            buffer.append("P1 : " + result.getString(9) + "\n");
-            buffer.append("P2 : " + result.getString(10) + "\n");
-            buffer.append("P3 : " + result.getString(11) + "\n");
-            buffer.append("Risk : " + result.getString(12) + "\n");
+            buffer.append("P1_1 : " + result.getString(9) + "\n");
+            buffer.append("P1_2 : " + result.getString(10) + "\n");
+            buffer.append("P2 : " + result.getString(11) + "\n");
+            buffer.append("P3 : " + result.getString(12) + "\n");
+            buffer.append("Risk : " + result.getString(13) + "\n");
             */
 
             TemperatureData[i] = Double.parseDouble(result.getString(9));
-            RiskData[i] = Double.parseDouble(result.getString(12));
+            RiskData[i] = Double.parseDouble(result.getString(13));
 
             i++;
         }
@@ -131,7 +132,7 @@ public class Tab_History extends Fragment {
         gridRender.setGridColor(Color.parseColor("#ea8383"));
 
         graph.addSeries(seriesRisk);
-        graph.setTitle("Armpit Temperature"); //Blood oxygen saturation;  Blood pressure
+        graph.setTitle("Risk"); //Blood oxygen saturation;  Blood pressure; Armpit Temperature
         graph.setTitleColor(Color.parseColor("#bf0913"));
 
     }
