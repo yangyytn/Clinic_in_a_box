@@ -8,15 +8,6 @@
     tools:context="com.example.estelleyyy.clinic_in_a_box.TabReportActivity"
     tools:layout_editor_absoluteY="25dp">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="154dp"
-        android:layout_height="18dp"
-        android:text="History"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_editor_absoluteY="45dp" />
-
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="769dp"
