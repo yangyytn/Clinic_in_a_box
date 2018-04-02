@@ -11,8 +11,6 @@ import java.util.List;
 
 public class GlobalVariables extends Application {
     private int patientID;
-
-
     private String firstName, lastName;
 
     public int getPatientID() {

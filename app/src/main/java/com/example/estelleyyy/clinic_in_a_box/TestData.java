@@ -7,7 +7,7 @@ package com.example.estelleyyy.clinic_in_a_box;
 public class TestData {
 
     int PatientID, Q1, Q2, Q3, Q4, Q5;
-    float P1, P2, P3, RiskPercentage, TestAge;
+    double P1, P2, P3, RiskPercentage, TestAge;
 
     public void setPatientID(int PatientID){
         this.PatientID = PatientID;
@@ -17,11 +17,11 @@ public class TestData {
         return this.PatientID;
     }
 
-    public void setTestAge(float TestAge){
+    public void setTestAge(double TestAge){
         this.TestAge = TestAge;
     }
 
-    public float getTestAge(){
+    public double getTestAge(){
         return this.TestAge;
     }
 
@@ -65,35 +65,35 @@ public class TestData {
         return this.Q5;
     }
 
-    public void setP1(float P1){
+    public void setP1(double P1){
         this.P1 = P1;
     }
 
-    public float getP1(){
+    public double getP1(){
         return this.P1;
     }
 
-    public void setP2(float P2){
+    public void setP2(double P2){
         this.P2 = P2;
     }
 
-    public float getP2(){
+    public double getP2(){
         return this.P2;
     }
 
-    public void setP3(float P3){
+    public void setP3(double P3){
         this.P3 = P3;
     }
 
-    public float getP3(){
+    public double getP3(){
         return this.P3;
     }
 
-    public void setRiskPercentage(float RiskPercentage){
+    public void setRiskPercentage(double RiskPercentage){
         this.RiskPercentage = RiskPercentage;
     }
 
-    public float getRiskPercentage(){
+    public double getRiskPercentage(){
         return this.RiskPercentage;
     }
 
