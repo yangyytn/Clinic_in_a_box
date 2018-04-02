@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Tab_Result extends Fragment {
 
@@ -106,15 +107,11 @@ public class Tab_Result extends Fragment {
         //Calling function from another class.
         result = FN.RiskPercentAlg(Qresults, age);
 
-
         //set risk percentage to global variable
         ((GlobalVariables) this.getActivity().getApplication()).setRisk(result);
 
         //push risk to database
-        databaseHelper = new DatabaseHelper(this.getActivity());
-        TestData t = new TestData();
-        System.out.println("system out to see risk %: "+result);
-        t.setRiskPercentage(result);
+        PushToDatabase(Qresults);
 
         return result;
 
@@ -124,7 +121,45 @@ public class Tab_Result extends Fragment {
     }
 
 
+    // connect to database
+    public void PushToDatabase(int[] Qresult) {
+        databaseHelper = new DatabaseHelper(this.getActivity());
+        TestData t = new TestData();
 
+        // push the questionnaire & test results to the database[]
+
+        t.setQ1(Qresult[0]);
+        t.setQ2(Qresult[1]);
+        t.setQ3(Qresult[2]);
+        t.setQ4(Qresult[3]);
+        t.setQ5(Qresult[4]);
+
+        // push age
+        int age = ((GlobalVariables) this.getActivity().getApplication()).getAge();
+        t.setTestAge(age);
+
+        // push test Pid
+        int Pid = ((GlobalVariables) this.getActivity().getApplication()).getPatientID();
+        t.setPatientID(Pid);
+
+        // push risk
+        double risk = ((GlobalVariables) this.getActivity().getApplication()).getRisk();
+        t.setRiskPercentage(risk);
+
+        // push physical
+        // todo: push p1
+        double[] P1 = ((GlobalVariables) this.getActivity().getApplication()).getBloodPressure();
+        double P2 = ((GlobalVariables) this.getActivity().getApplication()).getOxygen();
+        double P3 = ((GlobalVariables) this.getActivity().getApplication()).getTemp();
+        //t.setP1(P1);
+        t.setP2(P2);
+        t.setP3(P3);
+
+
+        boolean isInserted = databaseHelper.insertTest(t);
+        System.out.println("Check if data is inserted: " +isInserted);
+
+    }
 
 
 
