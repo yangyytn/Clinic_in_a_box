@@ -1,5 +1,6 @@
 package com.example.estelleyyy.clinic_in_a_box;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -141,5 +142,12 @@ public class TabReportActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+
+    public void goToFinish(View v){
+        Intent startNewActivity = new Intent(this, Finish.class);   //todo: finish java has some problems
+        startActivity(startNewActivity);
+
     }
 }
