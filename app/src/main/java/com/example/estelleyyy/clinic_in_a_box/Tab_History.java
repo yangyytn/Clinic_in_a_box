@@ -4,7 +4,6 @@ package com.example.estelleyyy.clinic_in_a_box;
  * Created by estelleyyy on 2018-03-11.
  */
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -42,6 +41,20 @@ public class Tab_History extends Fragment {
         builder.show();
     }
 
+    public static void reverse(double[] input) {
+    // handling null, empty and one element array
+        if(input == null || input.length <= 1)
+        { return; }
+
+        for (int i = 0; i < input.length / 2; i++) {
+            double temp = input[i];
+            // swap numbers
+            input[i] = input[input.length - 1 -i];
+            input[input.length - 1 - i] = temp;
+        }
+    }
+
+
     public void viewHistoryTestData(View rootView){
         int pid = ((GlobalVariables) this.getActivity().getApplication()).getPatientID();
 
@@ -52,11 +65,11 @@ public class Tab_History extends Fragment {
             return;
         }
 
-        final double[] TemperatureData;
+        double[] TemperatureData;
         TemperatureData = new double[result.getCount()];
 
 
-        final double[] RiskData;
+        double[] RiskData;
         RiskData = new double[result.getCount()];
 
         int i = 0 ;
@@ -74,6 +87,7 @@ public class Tab_History extends Fragment {
 
             TemperatureData[i] = Double.parseDouble(result.getString(9));
             RiskData[i] = Double.parseDouble(result.getString(12));
+
             i++;
         }
 
@@ -82,7 +96,15 @@ public class Tab_History extends Fragment {
 
         TextView P1_textView = rootView.findViewById(R.id.textView17);
         P1_textView.setText(P1_output);
+
+
+        for (i = 0; i < RiskData.length; i++){
+            RiskData[i] = i;
+        }
+
 */
+
+        reverse(RiskData);
 
         GraphView graph = (GraphView) rootView.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> seriesTemperature = new LineGraphSeries<>(new DataPoint[] {});
@@ -103,7 +125,7 @@ public class Tab_History extends Fragment {
         seriesRisk.setDrawDataPoints(true);
         seriesRisk.setDataPointsRadius(3);
         seriesRisk.setThickness(2);
-        seriesRisk.setBackgroundColor(Color.parseColor("#ea8383"));
+        //seriesRisk.setBackgroundColor(Color.parseColor("#ea8383"));
 
         GridLabelRenderer gridRender = graph.getGridLabelRenderer();
         gridRender.setGridColor(Color.parseColor("#ea8383"));
