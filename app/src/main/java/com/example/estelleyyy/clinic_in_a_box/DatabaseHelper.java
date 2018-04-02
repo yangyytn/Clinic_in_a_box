@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "patients.db";
 
     //Patients Information Table
@@ -37,7 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_Q3 = "Q3";
     public static final String COLUMN_Q4 = "Q4";
     public static final String COLUMN_Q5 = "Q5";
-    public static final String COLUMN_P1 = "P1";//physical tests results
+    public static final String COLUMN_P1_1 = "P1_1";//physical tests results
+    public static final String COLUMN_P1_2 = "P1_2";
     public static final String COLUMN_P2 = "P2";
     public static final String COLUMN_P3 = "P3";
     public static final String COLUMN_RISK = "RiskPercentage"; //in percentage
@@ -67,7 +68,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_Q3 + " INTEGER, " +
                 COLUMN_Q4 + " INTEGER, " +
                 COLUMN_Q5 + " INTEGER, " +
-                COLUMN_P1 + " FLOAT, " +
+                COLUMN_P1_1 + " FLOAT, " +
+                COLUMN_P1_2 + " FLOAT, " +
                 COLUMN_P2 + " FLOAT, " +
                 COLUMN_P3 + " FLOAT, " +
                 COLUMN_RISK + " FLOAT " +
@@ -217,7 +219,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Get Test Data by patientID
     public Cursor getTestData(int patientID){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor result = db.rawQuery("SELECT * FROM  " + TABLE_NAME_TEST + " WHERE PatientID = " + patientID + " LIMIT 5", null);
+        Cursor result = db.rawQuery("SELECT * FROM  " + TABLE_NAME_TEST + " WHERE PatientID = " + patientID + " ORDER BY TestID DESC LIMIT 5 ", null);
         return result;
     }
 
@@ -243,9 +245,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_Q3, testData.getQ3());
         values.put(COLUMN_Q4, testData.getQ4());
         values.put(COLUMN_Q5, testData.getQ5());
-        values.put(COLUMN_P1, testData.getP1());
+        values.put(COLUMN_P1_1, testData.getP1_1());
+        values.put(COLUMN_P1_2, testData.getP1_2());
         values.put(COLUMN_P2, testData.getP2());
-        values.put(COLUMN_P1, testData.getP3());
+        values.put(COLUMN_P3, testData.getP3());
         values.put(COLUMN_RISK, testData.getRiskPercentage());
 
         long result = db.insert(TABLE_NAME_TEST, null, values);

@@ -7,7 +7,7 @@ package com.example.estelleyyy.clinic_in_a_box;
 public class TestData {
 
     int PatientID, Q1, Q2, Q3, Q4, Q5;
-    double P1, P2, P3, RiskPercentage, TestAge;
+    double P1_1 ,P1_2, P2, P3, RiskPercentage, TestAge;
 
     public void setPatientID(int PatientID){
         this.PatientID = PatientID;
@@ -65,12 +65,20 @@ public class TestData {
         return this.Q5;
     }
 
-    public void setP1(double P1){
-        this.P1 = P1;
+    public void setP1_1(double P1_1){
+        this.P1_1 = P1_1;
     }
 
-    public double getP1(){
-        return this.P1;
+    public double getP1_1(){
+        return this.P1_1;
+    }
+
+    public void setP1_2(double P1_2){
+        this.P1_2 = P1_2;
+    }
+
+    public double getP1_2(){
+        return this.P1_2;
     }
 
     public void setP2(double P2){
