@@ -145,13 +145,14 @@ public class Tab_Result extends Fragment {
         // push risk
         double risk = ((GlobalVariables) this.getActivity().getApplication()).getRisk();
         t.setRiskPercentage(risk);
+        System.out.println("看看risk："+risk);
 
         // push physical
-        // todo: push p1
         double[] P1 = ((GlobalVariables) this.getActivity().getApplication()).getBloodPressure();
         double P2 = ((GlobalVariables) this.getActivity().getApplication()).getOxygen();
         double P3 = ((GlobalVariables) this.getActivity().getApplication()).getTemp();
-        //t.setP1(P1);
+        t.setP1_1(P1[0]);
+        t.setP1_2(P1[1]);
         t.setP2(P2);
         t.setP3(P3);
 
