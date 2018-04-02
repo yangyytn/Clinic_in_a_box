@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 
+import java.io.SyncFailedException;
+
 
 public class Questionnaire extends AppCompatActivity {
 
@@ -51,6 +53,13 @@ public class Questionnaire extends AppCompatActivity {
         else {
             output="Hello, welcome to the remote clinic!";
         }
+
+        int Pid1 = ((GlobalVariables) this.getApplication()).getPatientID();
+        double oxygen1 = ((GlobalVariables) this.getApplication()).getOxygen();
+        int[] result1 = ((GlobalVariables) this.getApplication()).getQresult();
+        System.out.println("Check values before taking the questionnaire (this should be cleared already)");
+        System.out.println("Pid is: "+Pid1+"\noxygen is: "+oxygen1+"\n");
+        System.out.println("results are: "+result1[4]);
 
         // globally
         TextView textView1;
@@ -349,6 +358,9 @@ public class Questionnaire extends AppCompatActivity {
         int Pid = ((GlobalVariables) this.getApplication()).getPatientID();
         t.setPatientID(Pid);
 
+        //push risk
+        double risk = ((GlobalVariables) this.getApplication()).getRisk();
+        t.setRiskPercentage(risk);
 
         boolean isInserted = databaseHelper.insertTest(t);
         if (isInserted) {
