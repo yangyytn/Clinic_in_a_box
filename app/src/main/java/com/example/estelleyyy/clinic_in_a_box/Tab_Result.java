@@ -9,11 +9,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.os.Bundle;
+import android.widget.Toast;
 
 public class Tab_Result extends Fragment {
+
+    DatabaseHelper databaseHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,7 +97,6 @@ public class Tab_Result extends Fragment {
 
 
     // function to display (current) test result
-    //分开variables来return,,,还没做完
     double CurrentTestResult(int[] Qresults) {
 
         double result;
@@ -107,19 +107,60 @@ public class Tab_Result extends Fragment {
         //Calling function from another class.
         result = FN.RiskPercentAlg(Qresults, age);
 
-
         //set risk percentage to global variable
         ((GlobalVariables) this.getActivity().getApplication()).setRisk(result);
+
+        //push risk to database
+        PushToDatabase(Qresults);
 
         return result;
 
 
-        //return output; //todo: output1, output2, test1, test2, test3;  //need to change
+        //return output;
 
     }
 
 
+    // connect to database
+    public void PushToDatabase(int[] Qresult) {
+        databaseHelper = new DatabaseHelper(this.getActivity());
+        TestData t = new TestData();
 
+        // push the questionnaire & test results to the database[]
+
+        t.setQ1(Qresult[0]);
+        t.setQ2(Qresult[1]);
+        t.setQ3(Qresult[2]);
+        t.setQ4(Qresult[3]);
+        t.setQ5(Qresult[4]);
+
+        // push age
+        int age = ((GlobalVariables) this.getActivity().getApplication()).getAge();
+        t.setTestAge(age);
+
+        // push test Pid
+        int Pid = ((GlobalVariables) this.getActivity().getApplication()).getPatientID();
+        t.setPatientID(Pid);
+
+        // push risk
+        double risk = ((GlobalVariables) this.getActivity().getApplication()).getRisk();
+        t.setRiskPercentage(risk);
+        System.out.println("看看risk："+risk);
+
+        // push physical
+        double[] P1 = ((GlobalVariables) this.getActivity().getApplication()).getBloodPressure();
+        double P2 = ((GlobalVariables) this.getActivity().getApplication()).getOxygen();
+        double P3 = ((GlobalVariables) this.getActivity().getApplication()).getTemp();
+        t.setP1_1(P1[0]);
+        t.setP1_2(P1[1]);
+        t.setP2(P2);
+        t.setP3(P3);
+
+
+        boolean isInserted = databaseHelper.insertTest(t);
+        System.out.println("Check if data is inserted: " +isInserted);
+
+    }
 
 
 

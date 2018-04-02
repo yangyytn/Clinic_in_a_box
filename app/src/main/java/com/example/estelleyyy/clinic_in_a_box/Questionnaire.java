@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 
+import java.io.SyncFailedException;
+
 
 public class Questionnaire extends AppCompatActivity {
 
@@ -51,6 +53,13 @@ public class Questionnaire extends AppCompatActivity {
         else {
             output="Hello, welcome to the remote clinic!";
         }
+
+        int Pid1 = ((GlobalVariables) this.getApplication()).getPatientID();
+        double oxygen1 = ((GlobalVariables) this.getApplication()).getOxygen();
+        int[] result1 = ((GlobalVariables) this.getApplication()).getQresult();
+        System.out.println("Check values before taking the questionnaire (this should be cleared already)");
+        System.out.println("Pid is: "+Pid1+"\noxygen is: "+oxygen1+"\n");
+        System.out.println("results are: "+result1[4]);
 
         // globally
         TextView textView1;
@@ -252,8 +261,8 @@ public class Questionnaire extends AppCompatActivity {
                     System.out.println("pass here!!\n\n\n\n\n\n\n\n\n!!!!!!");
 
 
-                    // store the answers
-                    PushToDatabase(Qresults);
+                    // store the answers to global
+                    PushToGlobal(Qresults);
 
                     // analysis of the results, determine what physical tests needed to perform
                    /* if (!AnalyzeQresults(Qresults)) {
@@ -328,37 +337,7 @@ public class Questionnaire extends AppCompatActivity {
     }
 
 
-
-    // connect to database
-    public void PushToDatabase(int[] Qresult) {
-        databaseHelper = new DatabaseHelper(this);
-        TestData t = new TestData();
-
-        // push the questionnaire & test results to the database[]
-
-        t.setQ1(Qresult[0]);
-        t.setQ2(Qresult[1]);
-        t.setQ3(Qresult[2]);
-        t.setQ4(Qresult[3]);
-        t.setQ5(Qresult[4]);
-
-        // push age
-        t.setTestAge(Qresult[5]);
-
-        // push test Pid
-        int Pid = ((GlobalVariables) this.getApplication()).getPatientID();
-        t.setPatientID(Pid);
-
-
-        boolean isInserted = databaseHelper.insertTest(t);
-        if (isInserted) {
-            Toast.makeText(Questionnaire.this, "Test Data Inserted", Toast.LENGTH_LONG).show();
-        }
-        else {
-            Toast.makeText(Questionnaire.this, "Test Data Not Inserted", Toast.LENGTH_LONG).show();
-        }
-
-
+    public void PushToGlobal(int[] Qresult) {
         int[] QuestionAnswers = new int[5];
         for (int i=0; i<5; i++) {
             QuestionAnswers[i] = Qresult[i];
@@ -372,9 +351,9 @@ public class Questionnaire extends AppCompatActivity {
         int x = ((GlobalVariables) this.getApplication()).getAge();
         System.out.println("\n\n\n\n\n\n\n\n\n!!!!!!!!\n\n\nsee this age: " + x);
 
-
-
     }
+
+
 
     // todo: test: need to be removed after
    /* void AlgorithmTest(int[] Qresult) {

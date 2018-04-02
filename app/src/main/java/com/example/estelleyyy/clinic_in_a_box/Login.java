@@ -57,10 +57,11 @@ public class Login extends AppCompatActivity {
                             buffer.append("Q3 :" + result.getString(6) + "\n");
                             buffer.append("Q4 :" + result.getString(7) + "\n");
                             buffer.append("Q5 :" + result.getString(8) + "\n");
-                            buffer.append("P1 :" + result.getString(9) + "\n");
-                            buffer.append("P2 :" + result.getString(10) + "\n");
-                            buffer.append("P3 :" + result.getString(11) + "\n");
-                            buffer.append("Risk :" + result.getString(12) + "\n");
+                            buffer.append("P1_1 :" + result.getString(9) + "\n");
+                            buffer.append("P1_2 :" + result.getString(10) + "\n");
+                            buffer.append("P2 :" + result.getString(11) + "\n");
+                            buffer.append("P3 :" + result.getString(12) + "\n");
+                            buffer.append("Risk :" + result.getString(13) + "\n");
 
                         }
 
