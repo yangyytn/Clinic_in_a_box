@@ -276,7 +276,6 @@ public class DiagnosisAlgorithm extends AppCompatActivity {
         }
 
 
-        // todo: return high low moderate; different calculator
         // calculate the percentage
         if ( (high==2) || (weight > 8) ) {
             // high risk!

@@ -358,9 +358,6 @@ public class Questionnaire extends AppCompatActivity {
         int Pid = ((GlobalVariables) this.getApplication()).getPatientID();
         t.setPatientID(Pid);
 
-        //push risk
-        double risk = ((GlobalVariables) this.getApplication()).getRisk();
-        t.setRiskPercentage(risk);
 
         boolean isInserted = databaseHelper.insertTest(t);
         if (isInserted) {

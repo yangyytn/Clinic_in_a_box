@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.os.Bundle;
 
 public class Tab_Result extends Fragment {
+
+    DatabaseHelper databaseHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,7 +96,6 @@ public class Tab_Result extends Fragment {
 
 
     // function to display (current) test result
-    //分开variables来return,,,还没做完
     double CurrentTestResult(int[] Qresults) {
 
         double result;
@@ -111,10 +110,16 @@ public class Tab_Result extends Fragment {
         //set risk percentage to global variable
         ((GlobalVariables) this.getActivity().getApplication()).setRisk(result);
 
+        //push risk to database
+        databaseHelper = new DatabaseHelper(this.getActivity());
+        TestData t = new TestData();
+        System.out.println("system out to see risk %: "+result);
+        t.setRiskPercentage(result);
+
         return result;
 
 
-        //return output; //todo: output1, output2, test1, test2, test3;  //need to change
+        //return output;
 
     }
 
