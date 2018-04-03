@@ -156,7 +156,7 @@ public class Diagnosis_BO extends AppCompatActivity {
     }
 
     public void goToNext(View v){
-        Intent startNewActivity = new Intent(this, TabReportActivity.class);
+        Intent startNewActivity = new Intent(this, Calculating.class);
         startActivity(startNewActivity);
     }
 

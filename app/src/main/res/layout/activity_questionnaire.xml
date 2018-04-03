@@ -352,7 +352,6 @@
                     android:id="@+id/Submit"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="154dp"
-
                     android:layout_height="match_parent"
                     android:background="@color/red"
                     android:gravity="center_horizontal"
