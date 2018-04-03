@@ -136,7 +136,6 @@ public class Tab_History extends Fragment {
             series_temperature.appendData(new DataPoint(i + 1, 0), true, 5);
         }
 
-
         for (i = 5 - result.getCount(); i < 5; i++){
             int j = i - (5 - result.getCount());
             series_risk.appendData(new DataPoint(i + 1, RiskData[j]), true, 5);
@@ -155,8 +154,8 @@ public class Tab_History extends Fragment {
 
         series_pressure_1.setColor(Color.parseColor("#bf0913"));
         series_pressure_1.setDrawDataPoints(true);
-        series_pressure_1.setDataPointsRadius(3);
-        series_pressure_1.setThickness(1);
+        series_pressure_1.setDataPointsRadius(5);
+        series_pressure_1.setThickness(2);
 
         series_pressure_2.setColor(Color.parseColor("#bf0913"));
         series_pressure_2.setDrawDataPoints(true);
@@ -175,17 +174,19 @@ public class Tab_History extends Fragment {
 
         graph_risk.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#bf0913"));
         graph_risk.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#bf0913"));
-        graph_risk.getGridLabelRenderer().setVerticalAxisTitle("Risk Percentage");
-        graph_risk.getGridLabelRenderer().setVerticalAxisTitleColor(Color.parseColor("#bf0913"));
-        //graph_risk.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
         graph_risk.getGridLabelRenderer().setGridColor(Color.parseColor("#f1b2b5"));
 
         graph_pressure.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#bf0913"));
         graph_pressure.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#bf0913"));
-        graph_pressure.getGridLabelRenderer().setVerticalAxisTitle("Risk Percentage");
-        graph_pressure.getGridLabelRenderer().setVerticalAxisTitleColor(Color.parseColor("#bf0913"));
-        graph_pressure.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
         graph_pressure.getGridLabelRenderer().setGridColor(Color.parseColor("#f1b2b5"));
+
+        graph_oxygen.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#bf0913"));
+        graph_oxygen.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#bf0913"));
+        graph_oxygen.getGridLabelRenderer().setGridColor(Color.parseColor("#f1b2b5"));
+
+        graph_temperature.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#bf0913"));
+        graph_temperature.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#bf0913"));
+        graph_temperature.getGridLabelRenderer().setGridColor(Color.parseColor("#f1b2b5"));
 
 
         // todo: change data series
