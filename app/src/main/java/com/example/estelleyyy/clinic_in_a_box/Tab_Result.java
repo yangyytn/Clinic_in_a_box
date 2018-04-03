@@ -68,8 +68,8 @@ public class Tab_Result extends Fragment {
         textView2.setText(output2);
 
         if (Result<25) {
-            textView1.setTextColor(0xff006600);     // green
-            textView2.setTextColor(0xff006600);
+            textView1.setTextColor(0xff336600);     // green
+            textView2.setTextColor(0xff336600);
         }
         else if (Result>70) {
             textView1.setTextColor(0xffcc0000);     // red
@@ -91,6 +91,31 @@ public class Tab_Result extends Fragment {
         TextView textView5 = rootView.findViewById(R.id.textView15);
         textView5.setText(test3);
 
+        String FirstName = ((GlobalVariables) this.getActivity().getApplication()).getFirstName();
+        FirstName = FirstName.substring(0, 1).toUpperCase() + FirstName.substring(1);
+        String LastName = ((GlobalVariables) this.getActivity().getApplication()).getLastName();
+        LastName = LastName.substring(0, 1).toUpperCase() + LastName.substring(1);
+        String Name = FirstName + " " + LastName;
+
+        if (Name.length()>12) {
+            if (FirstName.length()<12) {
+                Name = FirstName;
+            }
+            else {
+                Name.substring(0,11);
+                System.out.println(Name);
+            }
+        }
+
+        Name = "Name: " + Name;
+        TextView textName = rootView.findViewById(R.id.textView19);
+        textName.setText(Name);
+
+        int Age = ((GlobalVariables) this.getActivity().getApplication()).getAge();
+        TextView textAge = rootView.findViewById(R.id.textView20);
+
+        String AgeStr = "Age: " + Age;
+        textAge.setText(AgeStr);
 
         return rootView;
     }
