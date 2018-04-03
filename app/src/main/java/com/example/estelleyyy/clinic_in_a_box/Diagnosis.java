@@ -50,10 +50,8 @@ public class Diagnosis extends AppCompatActivity {
                 data = new String(arg0, "UTF-8");
                 data.concat("/n");
                 tvAppend(testdisplay, data);
-                //armpit.add(data);
-
-                //temperature.add(data);
-                //testdisplay.setText(data);
+                armpit.add(data);
+                if(armpit.size()>20){serialPort.close();}
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -80,7 +78,7 @@ public class Diagnosis extends AppCompatActivity {
                             serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
                             serialPort.read(mCallback);
                             tvAppend(testdisplay,"Serial Connection Opened!\n");
-                            //onClickSend("temp");
+                            onClickSend("a");
                         } else {
                             Log.d("SERIAL", "PORT NOT OPEN");
                         }
@@ -115,12 +113,20 @@ public class Diagnosis extends AppCompatActivity {
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
         registerReceiver(broadcastReceiver, filter);
 
+        //if(armpit.size() >= 10)
+        //{
+            //serialPort.close();
+            double temp = CalculateFinalResult(armpit);
+            //((GlobalVariables) this.getApplication()).setTemp(temp);;
+            tvAppend(testdisplay,Double.toString(temp));
+
+        //}
+
     }
 
 
     public void onClickStart(View view) {
         tvAppend(testdisplay,"2");
-        //testdisplay.setText("123");
         HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
         tvAppend(testdisplay,"3");
         if (!usbDevices.isEmpty()) {
@@ -156,8 +162,6 @@ public class Diagnosis extends AppCompatActivity {
 
     public void onClickSend(String option) {
         serialPort.write(option.getBytes());
-        //tvAppend(textView, "\nData Sent : " + string + "\n");
-
     }
 
     private void tvAppend(TextView tv, CharSequence text) {
@@ -170,6 +174,24 @@ public class Diagnosis extends AppCompatActivity {
         ftv.append(ftext);
         }
         });
+    }
+
+    double CalculateFinalResult(List<String> raw_result)
+    {
+        List<String> last_ten = raw_result;
+        double temp = 0.0;
+        int count = 0;
+        for (int i=0; i < last_ten.size(); i++)
+        {
+            double element = Double.parseDouble(last_ten.get(i).split(":")[1]);
+            if(i > 10)
+            {
+                temp = temp + element;
+                count++;
+            }
+        }
+        temp = temp / count;
+        return temp;
     }
 }
 

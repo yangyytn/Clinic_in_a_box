@@ -22,4 +22,9 @@ public class Welcome extends AppCompatActivity {
         startActivity(startNewActivity);
     }
 
+    public void goToTemp(View v) {
+        Intent startNewActivity = new Intent(this, Diagnosis.class);
+        startActivity(startNewActivity);
+    }
+
 }
