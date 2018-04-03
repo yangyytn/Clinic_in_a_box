@@ -31,6 +31,7 @@
         <activity android:name=".Finish" />
         <activity android:name=".Diagnosis_BP" />
         <activity android:name=".Diagnosis_BO" />
+        <activity android:name=".Calculating" />
         <activity
             android:name=".TabReportActivity"
             android:label="@string/title_activity_tab_report"

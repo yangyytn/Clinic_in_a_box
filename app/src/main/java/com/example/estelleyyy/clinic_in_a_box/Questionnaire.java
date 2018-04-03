@@ -294,11 +294,6 @@ public class Questionnaire extends AppCompatActivity {
         startActivity(startNewActivity);
     }
 
-    // go to the last page (no tests needed)
-    public void goToFinish(View v) {
-        Intent startNewActivity = new Intent(this, Finish.class);
-        startActivity(startNewActivity);
-    }
 
     public boolean AnalyzeQresults(int[] Qresults) {
 
