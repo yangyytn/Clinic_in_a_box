@@ -16,7 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.931"
+        app:layout_constraintVertical_bias="0.7"
         app:srcCompat="@drawable/report_bg" />
 
     <TextView
@@ -28,24 +28,24 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="740dp"
+        android:layout_marginBottom="725dp"
         android:fontFamily="@font/antic"
         android:text="40%"
         android:textSize="110sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="436dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="740dp"
+        android:layout_height="78dp"
+        android:layout_marginBottom="712dp"
         android:fontFamily="@font/antic"
         android:text="Moderate Risk"
         android:textAlignment="center"
-        android:textSize="62sp"
+        android:textSize="58sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.897"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -94,54 +94,32 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
-        android:id="@+id/textView17"
-        android:layout_width="80dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Name:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView18"
-        app:layout_constraintEnd_toStartOf="@+id/textView19"
-        app:layout_constraintHorizontal_bias="0.981"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="58dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="824dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Age:"
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginBottom="1720dp"
+        android:layout_marginEnd="40dp"
+        android:text="TextName"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView20"
-        app:layout_constraintHorizontal_bias="0.96"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="109dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="72dp"
-        android:text="TextView"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="108dp" />
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
         android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        android:text="TextView"
+        android:layout_width="92dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="805dp"
+        android:layout_marginEnd="135dp"
+        android:text="TextAge"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="142dp" />
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
