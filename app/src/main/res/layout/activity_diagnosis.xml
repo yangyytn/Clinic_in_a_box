@@ -16,7 +16,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:backgroundTint="@color/red"
-        android:onClick="onClickStart"
+        android:onClick="goToNext"
         android:text="START"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"

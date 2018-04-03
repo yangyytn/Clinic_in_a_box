@@ -56,22 +56,26 @@ public class Tab_History extends Fragment {
 
 
     public void viewHistoryTestData(View rootView){
-        int pid = ((GlobalVariables) this.getActivity().getApplication()).getPatientID();
 
+        // Get Test History from Database
+        int pid = ((GlobalVariables) this.getActivity().getApplication()).getPatientID();
         Cursor result = databaseHelper.getTestData(pid);
 
+        // If No Data in database, return
         if (result.getCount() == 0){
             showMessage("Error", "No Test Data in Database");
             return;
         }
 
-        double[] TemperatureData;
+        // Define Risk, Pressure, Oxygen and Temperature data
+        double[] RiskData, PressureData_1, PressureData_2, OxygenData, TemperatureData;
+        RiskData = new double[result.getCount()];
+        PressureData_1 = new double[result.getCount()];
+        PressureData_2 = new double[result.getCount()];
+        OxygenData = new double[result.getCount()];
         TemperatureData = new double[result.getCount()];
 
-
-        double[] RiskData;
-        RiskData = new double[result.getCount()];
-
+        // Parse Queries to Datasets
         int i = 0 ;
         while (result.moveToNext()) {
             /*
@@ -86,54 +90,112 @@ public class Tab_History extends Fragment {
             buffer.append("Risk : " + result.getString(13) + "\n");
             */
 
-            TemperatureData[i] = Double.parseDouble(result.getString(9));
+            PressureData_1[i] = Double.parseDouble(result.getString(9));
+            PressureData_2[i] = Double.parseDouble(result.getString(10));
+            OxygenData[i] = Double.parseDouble(result.getString(11));
+            TemperatureData[i] = Double.parseDouble(result.getString(12));
             RiskData[i] = Double.parseDouble(result.getString(13));
 
             i++;
         }
 
-        /*TextView textView1 = rootView.findViewById(R.id.textView11);
-        textView1.setText(output);
-
-        TextView P1_textView = rootView.findViewById(R.id.textView17);
-        P1_textView.setText(P1_output);
-
-
-        for (i = 0; i < RiskData.length; i++){
-            RiskData[i] = i;
+        // todo: delete testing data
+        for (i = 0; i < result.getCount(); i++){
+            PressureData_1[i] = i;
+            PressureData_2[i] = i + 10;
+            OxygenData[i] = i;
+            TemperatureData[i] = i;
         }
 
-*/
-
+        reverse(PressureData_1);
+        reverse(PressureData_2);
+        reverse(OxygenData);
+        reverse(TemperatureData);
         reverse(RiskData);
 
-        GraphView graph = (GraphView) rootView.findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> seriesTemperature = new LineGraphSeries<>(new DataPoint[] {});
+        // Find Graph in UI
+        GraphView graph_risk = (GraphView) rootView.findViewById(R.id.graph_risk);
+        LineGraphSeries<DataPoint> series_risk = new LineGraphSeries<>(new DataPoint[] {});
 
-        GraphView Risk_graph = (GraphView) rootView.findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> seriesRisk = new LineGraphSeries<>(new DataPoint[] {});
+        GraphView graph_pressure = (GraphView) rootView.findViewById(R.id.graph_pressure);
+        LineGraphSeries<DataPoint> series_pressure_1 = new LineGraphSeries<>(new DataPoint[] {});
+        LineGraphSeries<DataPoint> series_pressure_2 = new LineGraphSeries<>(new DataPoint[] {});
 
-        for (i = 0; i < RiskData.length; i++){
-            seriesRisk.appendData(new DataPoint(i + 1, RiskData[i]), true, 5);
+        GraphView graph_oxygen = (GraphView) rootView.findViewById(R.id.graph_oxygen);
+        LineGraphSeries<DataPoint> series_oxygen = new LineGraphSeries<>(new DataPoint[] {});
+
+        GraphView graph_temperature = (GraphView) rootView.findViewById(R.id.graph_temperature);
+        LineGraphSeries<DataPoint> series_temperature = new LineGraphSeries<>(new DataPoint[] {});
+
+        // Append data to series
+        for (i = 0; i < 5 - result.getCount(); i++){
+            series_risk.appendData(new DataPoint(i + 1, 0), true, 5);
+            series_pressure_1.appendData(new DataPoint(i + 1, 0), true, 5);
+            series_pressure_2.appendData(new DataPoint(i + 1, 0), true, 5);
+            series_oxygen.appendData(new DataPoint(i + 1, 0), true, 5);
+            series_temperature.appendData(new DataPoint(i + 1, 0), true, 5);
+        }
+
+        for (i = 5 - result.getCount(); i < 5; i++){
+            int j = i - (5 - result.getCount());
+            series_risk.appendData(new DataPoint(i + 1, RiskData[j]), true, 5);
+            series_pressure_1.appendData(new DataPoint(i + 1, PressureData_1[j]), true, 5);
+            series_pressure_2.appendData(new DataPoint(i + 1, PressureData_2[j]), true, 5);
+            series_oxygen.appendData(new DataPoint(i + 1, OxygenData[j]), true, 5);
+            series_temperature.appendData(new DataPoint(i + 1, TemperatureData[j]), true, 5);
         }
 
 
-        for (i = 0; i < TemperatureData.length; i++){
-            seriesTemperature.appendData(new DataPoint(i + 1, TemperatureData[i]), true, 5);
-        }
+        // Draw Graph
+        series_risk.setColor(Color.parseColor("#bf0913"));
+        series_risk.setDrawDataPoints(true);
+        series_risk.setDataPointsRadius(5);
+        series_risk.setThickness(2);
 
-        seriesRisk.setColor(Color.parseColor("#bf0913"));
-        seriesRisk.setDrawDataPoints(true);
-        seriesRisk.setDataPointsRadius(3);
-        seriesRisk.setThickness(2);
-        //seriesRisk.setBackgroundColor(Color.parseColor("#ea8383"));
+        series_pressure_1.setColor(Color.parseColor("#bf0913"));
+        series_pressure_1.setDrawDataPoints(true);
+        series_pressure_1.setDataPointsRadius(5);
+        series_pressure_1.setThickness(2);
 
-        GridLabelRenderer gridRender = graph.getGridLabelRenderer();
-        gridRender.setGridColor(Color.parseColor("#ea8383"));
+        series_pressure_2.setColor(Color.parseColor("#bf0913"));
+        series_pressure_2.setDrawDataPoints(true);
+        series_pressure_2.setDataPointsRadius(5);
+        series_pressure_2.setThickness(2);
 
-        graph.addSeries(seriesRisk);
-        graph.setTitle("Risk"); //Blood oxygen saturation;  Blood pressure; Armpit Temperature
-        graph.setTitleColor(Color.parseColor("#bf0913"));
+        series_oxygen.setColor(Color.parseColor("#bf0913"));
+        series_oxygen.setDrawDataPoints(true);
+        series_oxygen.setDataPointsRadius(5);
+        series_oxygen.setThickness(2);
+
+        series_temperature.setColor(Color.parseColor("#bf0913"));
+        series_temperature.setDrawDataPoints(true);
+        series_temperature.setDataPointsRadius(5);
+        series_temperature.setThickness(2);
+
+        graph_risk.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#bf0913"));
+        graph_risk.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#bf0913"));
+        graph_risk.getGridLabelRenderer().setGridColor(Color.parseColor("#f1b2b5"));
+
+        graph_pressure.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#bf0913"));
+        graph_pressure.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#bf0913"));
+        graph_pressure.getGridLabelRenderer().setGridColor(Color.parseColor("#f1b2b5"));
+
+        graph_oxygen.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#bf0913"));
+        graph_oxygen.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#bf0913"));
+        graph_oxygen.getGridLabelRenderer().setGridColor(Color.parseColor("#f1b2b5"));
+
+        graph_temperature.getGridLabelRenderer().setHorizontalLabelsColor(Color.parseColor("#bf0913"));
+        graph_temperature.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#bf0913"));
+        graph_temperature.getGridLabelRenderer().setGridColor(Color.parseColor("#f1b2b5"));
+
+
+        // todo: change data series
+        graph_risk.addSeries(series_risk);
+        graph_pressure.addSeries(series_pressure_1);
+        graph_pressure.addSeries(series_pressure_2);
+        graph_oxygen.addSeries(series_oxygen);
+        graph_temperature.addSeries(series_temperature);
+
 
     }
 
