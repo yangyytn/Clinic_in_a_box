@@ -57,9 +57,9 @@ public class GlobalVariables extends Application {
 
     // physical tests values
     //two values for BP: systalic, dia...
-    private double[] BloodPressure = new double[2];
-    private double oxygen;
-    private double armpit;
+    private double[] BloodPressure = new double[] {0.0, 0.0};
+    private double oxygen = 98;
+    private double armpit = 0.0;
 
     public double[] getBloodPressure() {
         return BloodPressure;
