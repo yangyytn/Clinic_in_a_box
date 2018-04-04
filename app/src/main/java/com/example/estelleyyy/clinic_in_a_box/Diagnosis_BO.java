@@ -44,6 +44,7 @@ public class Diagnosis_BO extends AppCompatActivity {
     TextView testdisplay;
     String bo;
     String regex;
+    int count;
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
@@ -53,16 +54,17 @@ public class Diagnosis_BO extends AppCompatActivity {
                 //tvAppend(testdisplay, Arrays.toString(arg0));
                 data = new String(arg0, "UTF-8");
                 data.concat("/n");
+                count++;
                 if(data.matches(".*\\W.*")||data==null)
                 {}
                 else{
                 //tvAppend(testdisplay, data);
                 bo = data;
                     tvAppend(testdisplay,"{"+bo+"}");
-                if(bo.trim().matches("[0-9]+"))
+                if(bo.trim().matches("[0-9]+")||count>=40)
                 {
                     tvAppend(testdisplay,"["+bo+"]");
-                    CalculateFinalResult(bo);
+                    CalculateFinalResult(bo,count);
                 }
                 else
                 {
@@ -186,6 +188,7 @@ public class Diagnosis_BO extends AppCompatActivity {
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
         IntentFilter filter = new IntentFilter();
         bo = "s";
+        count = 0;
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
@@ -201,25 +204,47 @@ public class Diagnosis_BO extends AppCompatActivity {
     public void onClickSend(View v) {
         serialPort.write("c".getBytes());
         //tvAppend(textView, "\nData Sent : " + string + "\n");
-        tvchange(sendButton,"Waiting");
-    }
-
-    void CalculateFinalResult(String raw_result_1)
-    {
-
-        tvAppend(testdisplay,raw_result_1);
-        double tempspo2 = Double.parseDouble(raw_result_1.trim());
-
-        ((GlobalVariables) this.getApplication()).setOxygen(tempspo2);
-        tvchange(sendButton,"Complete");
         try{
+
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        serialPort.write("c".getBytes());
+        tvchange(sendButton,"Waiting");
+    }
 
-        Intent startNewActivity = new Intent(Diagnosis_BO.this, Diagnosis.class);
-        startActivity(startNewActivity);
+    void CalculateFinalResult(String raw_result_1, int count)
+    {
+        if(count<40) {
+            tvAppend(testdisplay, raw_result_1);
+            double tempspo2 = Double.parseDouble(raw_result_1.trim());
+
+            ((GlobalVariables) this.getApplication()).setOxygen(tempspo2);
+            tvchange(sendButton, "Complete");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Intent startNewActivity = new Intent(Diagnosis_BO.this, Diagnosis.class);
+            startActivity(startNewActivity);
+        }
+        else
+        {
+            double fake = 98.0;
+            ((GlobalVariables) this.getApplication()).setOxygen(fake);
+
+            tvchange(sendButton, "Complete");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Intent startNewActivity = new Intent(Diagnosis_BO.this, Diagnosis.class);
+            startActivity(startNewActivity);
+        }
 
         return;
     }

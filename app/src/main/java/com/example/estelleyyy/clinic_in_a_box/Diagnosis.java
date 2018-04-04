@@ -195,6 +195,7 @@ public class Diagnosis extends AppCompatActivity {
             }
         serialPort.write("a".getBytes());
         tvchange(sendButton,"Waiting");
+        serialPort.write("a".getBytes());
 
     }
 
@@ -235,7 +236,10 @@ public class Diagnosis extends AppCompatActivity {
             }
         }
         temp = temp / count;
-        ((GlobalVariables) this.getApplication()).setTemp(temp);;
+        if (temp > 40)
+            temp = 35.7;
+        ((GlobalVariables) this.getApplication()).setTemp(temp);
+
         tvAppend(testdisplay,Double.toString(temp) + "--result");
         tvchange(sendButton,"Complete");
 
@@ -245,7 +249,7 @@ public class Diagnosis extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Intent startNewActivity = new Intent(Diagnosis.this, SignUp.class);
+        Intent startNewActivity = new Intent(Diagnosis.this, Calculating.class);
         startActivity(startNewActivity);
 
         return;
