@@ -8,6 +8,20 @@
     tools:context="com.example.estelleyyy.clinic_in_a_box.Diagnosis">
 
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="555dp"
+        android:layout_height="330dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/button4"
         android:layout_width="146dp"
@@ -29,63 +43,37 @@
         android:layout_width="639dp"
         android:layout_height="121dp"
         android:layout_marginBottom="14dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Please place the temperature sensor under the armpit and then press"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="727dp"
         android:layout_height="688dp"
         android:layout_marginTop="15dp"
-        app:layout_constraintHorizontal_bias="0.146"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.213"
         app:srcCompat="@drawable/temp_banner" />
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="466dp"
         android:layout_height="418dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/temperature_sensor_big" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="139dp"
-        android:layout_height="330dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.31"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.649" />
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.092"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.192" />
 
 </android.support.constraint.ConstraintLayout>

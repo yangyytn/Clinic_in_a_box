@@ -235,7 +235,7 @@ public class Diagnosis extends AppCompatActivity {
             }
         }
         temp = temp / count;
-        ((GlobalVariables) this.getApplication()).setTemp(temp);;
+        ((GlobalVariables) this.getApplication()).setTemp(temp);
         tvAppend(testdisplay,Double.toString(temp) + "--result");
         tvchange(sendButton,"Complete");
 
@@ -245,7 +245,7 @@ public class Diagnosis extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Intent startNewActivity = new Intent(Diagnosis.this, SignUp.class);
+        Intent startNewActivity = new Intent(Diagnosis.this, Calculating.class);
         startActivity(startNewActivity);
 
         return;
