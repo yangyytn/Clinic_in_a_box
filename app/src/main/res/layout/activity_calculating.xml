@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="386dp"
-        android:layout_height="718dp"
+        android:layout_height="519dp"
         android:layout_marginBottom="7dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -26,8 +26,8 @@
     <TextView
         android:id="@+id/place"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_marginBottom="450dp"
+        android:layout_height="87dp"
+        android:layout_marginBottom="350dp"
         android:text="Processing test data...\nCalculating the risk percentage...\nPress the Proceed button to continue."
         android:textAlignment="center"
         android:textSize="20sp"
@@ -39,7 +39,7 @@
         android:id="@+id/calcu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="372dp"
+        android:layout_marginBottom="272dp"
         android:backgroundTint="@color/red"
         android:elevation="0dp"
         android:onClick="goToReport"
