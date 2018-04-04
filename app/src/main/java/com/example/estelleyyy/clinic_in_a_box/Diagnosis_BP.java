@@ -32,15 +32,16 @@ import java.util.Map;
 
 public class Diagnosis_BP extends AppCompatActivity {
     public final String ACTION_USB_PERMISSION = "com.example.estelleyyy.clinic_in_a_box.USB_PERMISSION";
-    Button startButton;
+    Button sendButton;
     UsbManager usbManager;
     UsbDevice device;
     UsbSerialDevice serialPort;
     UsbDeviceConnection connection;
     TextView testdisplay;
-    List<String> sys;
+    String sys;
     List<String> dia;
-
+    String regex;
+    int count;
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
@@ -49,11 +50,22 @@ public class Diagnosis_BP extends AppCompatActivity {
             try {
                 data = new String(arg0, "UTF-8");
                 data.concat("/n");
-                tvAppend(testdisplay, data);
-                //armpit.add(data);
 
-                //temperature.add(data);
-                //testdisplay.setText(data);
+                tvAppend(testdisplay, "[" + data+ "]");
+                if(!sys.contains("Pulse")) {
+                    tvAppend(testdisplay,"{" + data + "}");
+                    sys = sys + data;
+                }
+                else
+                {
+                    tvAppend(testdisplay,"more");
+                    serialPort.close();
+                    if(count == 1) {
+                        CalculateFinalResult(sys);
+                    }
+                    else{}
+                    serialPort.close();
+                }
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -108,9 +120,11 @@ public class Diagnosis_BP extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diagnosis__bp);
         testdisplay = (TextView) findViewById(R.id.textView17);
+        sendButton = (Button) findViewById(R.id.bpstart);
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
-       //armpit = new ArrayList<>(); //need edit
         IntentFilter filter = new IntentFilter();
+        sys = " ";
+        count = 1;
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
@@ -153,7 +167,7 @@ public class Diagnosis_BP extends AppCompatActivity {
     }
 
 
-    public void goToNext(View v){
+    public void goTobo(View v){
 
         // for testing only! go to questionnaire page
         Intent startNewActivity = new Intent(this, Diagnosis_BO.class);
@@ -164,6 +178,14 @@ public class Diagnosis_BP extends AppCompatActivity {
     public void onClickSend(View v) {
         serialPort.write("b".getBytes());
         //tvAppend(textView, "\nData Sent : " + string + "\n");
+        try{
+
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        serialPort.write("b".getBytes());
+        tvchange(sendButton,"Waiting");
 
     }
 
@@ -178,5 +200,63 @@ public class Diagnosis_BP extends AppCompatActivity {
             }
         });
     }
-    
+
+    void CalculateFinalResult(String raw_result_1)
+    {
+        String word1 = "Systolic";
+        String word2 = "Diastolic";
+        String word3 = "Pulse";
+        double tempsys = 0.0;
+        double tempdia = 0.0;
+        int count = 0;
+
+        tempsys = Double.parseDouble(raw_result_1.substring((raw_result_1.indexOf(word1)+8),(raw_result_1.indexOf(word2))));
+
+        tempdia = Double.parseDouble(raw_result_1.substring((raw_result_1.indexOf(word2)+9),raw_result_1.indexOf(word3)));
+       tvAppend(testdisplay,Double.toString(tempsys));
+        tvAppend(testdisplay,Double.toString(tempdia));
+        double[] result = new double[2];
+        result[0] = tempsys;
+        result[1] = tempdia;
+        //((GlobalVariables) this.getApplication()).setBloodPressure(result);
+
+        tvchange(sendButton,"Complete");
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Intent startNewActivity = new Intent(Diagnosis_BP.this, Diagnosis.class);
+        startActivity(startNewActivity);
+
+        count++;
+
+        return;
+    }
+
+    private void tvchange(Button tv, CharSequence text) {
+        final Button ftv = tv;
+        final CharSequence ftext = text;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ftv.setText(ftext);
+            }
+        });
+    }
+
+    private void tvreset(TextView tv, CharSequence text) {
+        final TextView ftv = tv;
+        final CharSequence ftext = text;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ftv.setText(ftext);
+            }
+        });
+    }
+
 }

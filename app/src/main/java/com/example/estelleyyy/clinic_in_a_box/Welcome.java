@@ -23,7 +23,7 @@ public class Welcome extends AppCompatActivity {
     }
 
     public void goToTemp(View v) {
-        Intent startNewActivity = new Intent(this, Diagnosis.class);
+        Intent startNewActivity = new Intent(this, Diagnosis_BP.class);
         startActivity(startNewActivity);
     }
 

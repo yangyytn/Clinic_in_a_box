@@ -21,7 +21,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
@@ -33,10 +35,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.lang.Math;
 
 public class Diagnosis extends AppCompatActivity {
     public final String ACTION_USB_PERMISSION = "com.example.estelleyyy.clinic_in_a_box.USB_PERMISSION";
-    Button sendButton;
+    Button sendButton,dialogbutton;
     TextView textView;
     EditText editText;
     UsbManager usbManager;
@@ -45,6 +48,11 @@ public class Diagnosis extends AppCompatActivity {
     UsbDeviceConnection connection;
     TextView testdisplay;
     List<String> armpit;
+    String regex;
+    double result;
+    ProgressBar progressBar;
+    int progressStatus=0;
+
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
@@ -53,44 +61,25 @@ public class Diagnosis extends AppCompatActivity {
             try {
                 data = new String(arg0, "UTF-8");
                 data.concat("/n");
-                tvAppend(testdisplay, data+"--");
-               if(armpit.size()<41) {
-                   data.trim();
-                   if(data.contains(".")&&!data.contains("found")&&data!="") {
+
+               if(armpit.size()<21) {
+                   //tvAppend(testdisplay,String.valueOf(armpit.size())+"size");
+                   //data.trim();
+                   if(data.matches(regex)) {
+                       tvAppend(testdisplay, data+"--");
                        armpit.add(data);
                    }
                 }
                 else
                 {
                     tvAppend(testdisplay,"more");
-                   /* double temp = CalculateFinalResult(armpit);
-                    //((GlobalVariables) this.getApplication()).setTemp(temp);;
-                    tvAppend(testdisplay,Double.toString(temp));
                     serialPort.close();
-                    AlertDialog.Builder completion = new AlertDialog.Builder(Diagnosis.this);
-                    completion.setMessage("You have been completed armpit temperature test. Click OK to view report.")
-                            // .setCancelable(false)
-                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish();
-                                    Intent startNewActivity = new Intent(Diagnosis.this, TabReportActivity.class);
-                                    startActivity(startNewActivity);
-                                }
-                            });
-                    AlertDialog alert = completion.create();
-                    alert.setTitle("Status");
-                    alert.show();
-                    alert.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#ffffff"));
-                    alert.getButton(AlertDialog.BUTTON_NEUTRAL).setBackgroundColor(Color.parseColor("#bf0913"));
-                    int height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
-                    int width  = getResources().getDimensionPixelSize(R.dimen.dialog_width);
-                    alert.getButton(AlertDialog.BUTTON_NEUTRAL).setWidth(width);
-                    alert.getButton(AlertDialog.BUTTON_NEUTRAL).setHeight(height);
-*/
+
+                    CalculateFinalResult(armpit);
+
+
 
                 }
-                System.out.println(Arrays.toString(armpit.toArray()));
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -147,6 +136,7 @@ public class Diagnosis extends AppCompatActivity {
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
         sendButton = (Button) findViewById(R.id.button4);
         armpit = new ArrayList<>();
+        regex = "^\\d+\\.\\d*$";
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
@@ -197,7 +187,14 @@ public class Diagnosis extends AppCompatActivity {
 
     public void onClickSend(View view) {
             serialPort.write("a".getBytes());
-            serialPort.write("a".getBytes());
+            try{
+
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        serialPort.write("a".getBytes());
+        tvchange(sendButton,"Waiting");
 
     }
 
@@ -213,23 +210,72 @@ public class Diagnosis extends AppCompatActivity {
         });
     }
 
-    double CalculateFinalResult(List<String> raw_result)
+    void CalculateFinalResult(List<String> raw_result)
     {
-        List<String> last_ten = raw_result;
+       // List<String> last_ten = raw_result;
         double temp = 0.0;
         int count = 0;
-        for (int i=0; i < last_ten.size(); i++)
+        for (int i=0; i < raw_result.size(); i++)
         {
-            double element = Double.parseDouble(last_ten.get(i).split(":")[1]);
+            double element = Double.parseDouble(raw_result.get(i));
+
+
             if(i > 10)
             {
-                temp = temp + element;
-                count++;
+                double previous = Double.parseDouble(raw_result.get(i-1));
+                if(Math.abs(element - previous) >= 10)
+                {
+
+                }
+                else {
+                    temp = temp + element;
+                    count++;
+                }
+
             }
         }
         temp = temp / count;
-        return temp;
+        //((GlobalVariables) this.getApplication()).setTemp(temp);;
+        tvAppend(testdisplay,Double.toString(temp) + "--result");
+        tvchange(sendButton,"Complete");
+
+        try{
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Intent startNewActivity = new Intent(Diagnosis.this, Diagnosis_BO.class);
+        startActivity(startNewActivity);
+
+        return;
     }
+
+    private void tvchange(Button tv, CharSequence text) {
+        final Button ftv = tv;
+        final CharSequence ftext = text;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ftv.setText(ftext);
+            }
+        });
+    }
+
+    private void tvreset(TextView tv, CharSequence text) {
+        final TextView ftv = tv;
+        final CharSequence ftext = text;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ftv.setText(ftext);
+            }
+        });
+    }
+
+
 }
 
 

@@ -24,7 +24,9 @@ import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,20 +42,56 @@ public class Diagnosis_BO extends AppCompatActivity {
     UsbDeviceConnection connection;
 
     TextView testdisplay;
-    List<String> armpit;
+    String bo;
+    String regex;
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
         public void onReceivedData(byte[] arg0) {
             String data = null;
             try {
+                //tvAppend(testdisplay, Arrays.toString(arg0));
                 data = new String(arg0, "UTF-8");
                 data.concat("/n");
-                tvAppend(testdisplay, data);
-                //armpit.add(data);
+                if(data.matches(".*\\W.*")||data==null)
+                {}
+                else{
+                //tvAppend(testdisplay, data);
+                bo = data;
+                    tvAppend(testdisplay,"{"+bo+"}");
+                if(bo.trim().matches("[0-9]+"))
+                {
+                    tvAppend(testdisplay,"["+bo+"]");
+                    CalculateFinalResult(bo);
+                }
+                else
+                {
+                    //tvAppend(testdisplay,"{"+data+"}");
+                }
+                }
 
-                //temperature.add(data);
-                //testdisplay.setText(data);
+/*
+                if(bo.length()>5) {
+                    bo = data;
+                    tvAppend(testdisplay,"more");
+                    serialPort.close();
+
+                    CalculateFinalResult(bo);
+                }
+                else
+                {
+
+                   // tvchange(sendButton,"again");
+                   tvAppend(testdisplay,"{" + data + "}");
+                    data = data.trim();
+                    if(data!=null) {
+                        bo = " ";
+                        bo = bo+data;
+                        bo = bo.trim();
+                        tvAppend(testdisplay, "add");
+                    }
+                }*/
+
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -144,9 +182,10 @@ public class Diagnosis_BO extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diagnosis__bo);
         testdisplay = (TextView) findViewById(R.id.textView16);
+        sendButton = (Button) findViewById(R.id.spo2start);
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
-        armpit = new ArrayList<>(); //need edit
         IntentFilter filter = new IntentFilter();
+        bo = "s";
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
@@ -155,15 +194,34 @@ public class Diagnosis_BO extends AppCompatActivity {
     }
 
     public void goToNext(View v){
-        Intent startNewActivity = new Intent(this, Calculating.class);
+        Intent startNewActivity = new Intent(this, Diagnosis.class);
         startActivity(startNewActivity);
     }
-
 
     public void onClickSend(View v) {
         serialPort.write("c".getBytes());
         //tvAppend(textView, "\nData Sent : " + string + "\n");
+        tvchange(sendButton,"Waiting");
+    }
 
+    void CalculateFinalResult(String raw_result_1)
+    {
+
+        tvAppend(testdisplay,raw_result_1);
+        double tempspo2 = Double.parseDouble(raw_result_1.trim());
+
+        //((GlobalVariables) this.getApplication()).setBloodPressure(tempspo2);
+        tvchange(sendButton,"Complete");
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Intent startNewActivity = new Intent(Diagnosis_BO.this, SignUp.class);
+        startActivity(startNewActivity);
+
+        return;
     }
 
     private void tvAppend(TextView tv, CharSequence text) {
@@ -174,6 +232,30 @@ public class Diagnosis_BO extends AppCompatActivity {
             @Override
             public void run() {
                 ftv.append(ftext);
+            }
+        });
+    }
+
+    private void tvchange(Button tv, CharSequence text) {
+        final Button ftv = tv;
+        final CharSequence ftext = text;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ftv.setText(ftext);
+            }
+        });
+    }
+
+    private void tvreset(TextView tv, CharSequence text) {
+        final TextView ftv = tv;
+        final CharSequence ftext = text;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ftv.setText(ftext);
             }
         });
     }
