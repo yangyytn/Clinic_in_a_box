@@ -1,6 +1,9 @@
 package com.example.estelleyyy.clinic_in_a_box;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,29 +21,38 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.lang.Math;
 
 public class Diagnosis extends AppCompatActivity {
     public final String ACTION_USB_PERMISSION = "com.example.estelleyyy.clinic_in_a_box.USB_PERMISSION";
-    Button startButton, sendButton, clearButton, stopButton;
+    Button sendButton,dialogbutton;
     TextView textView;
     EditText editText;
     UsbManager usbManager;
     UsbDevice device;
     UsbSerialDevice serialPort;
     UsbDeviceConnection connection;
-    List temperature;
     TextView testdisplay;
     List<String> armpit;
+    String regex;
+    double result;
+    ProgressBar progressBar;
+    int progressStatus=0;
+
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
@@ -49,11 +61,25 @@ public class Diagnosis extends AppCompatActivity {
             try {
                 data = new String(arg0, "UTF-8");
                 data.concat("/n");
-                tvAppend(testdisplay, data);
-                //armpit.add(data);
 
-                //temperature.add(data);
-                //testdisplay.setText(data);
+               if(armpit.size()<21) {
+                   //tvAppend(testdisplay,String.valueOf(armpit.size())+"size");
+                   //data.trim();
+                   if(data.matches(regex)) {
+                       tvAppend(testdisplay, data+"--");
+                       armpit.add(data);
+                   }
+                }
+                else
+                {
+                    tvAppend(testdisplay,"more");
+                    serialPort.close();
+
+                    CalculateFinalResult(armpit);
+
+
+
+                }
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -80,7 +106,8 @@ public class Diagnosis extends AppCompatActivity {
                             serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
                             serialPort.read(mCallback);
                             tvAppend(testdisplay,"Serial Connection Opened!\n");
-                            onClickSend("a");
+
+
                         } else {
                             Log.d("SERIAL", "PORT NOT OPEN");
                         }
@@ -91,8 +118,7 @@ public class Diagnosis extends AppCompatActivity {
                     Log.d("SERIAL", "PERM NOT GRANTED");
                 }
             } else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_ATTACHED)) {
-                onClickStart(startButton);
-                //onClickSend("temp");
+
             } //else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) {
                 //onClickStop(stopButton);
 
@@ -108,21 +134,21 @@ public class Diagnosis extends AppCompatActivity {
         setContentView(R.layout.activity_diagnosis);
         testdisplay = (TextView) findViewById(R.id.textView3);
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
+        sendButton = (Button) findViewById(R.id.button4);
         armpit = new ArrayList<>();
+        regex = "^\\d+\\.\\d*$";
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
         registerReceiver(broadcastReceiver, filter);
+        onClickStart();
 
     }
 
 
-    public void onClickStart(View view) {
-        tvAppend(testdisplay,"2");
-        //testdisplay.setText("123");
+    public void onClickStart() {
         HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
-        tvAppend(testdisplay,"3");
         if (!usbDevices.isEmpty()) {
             boolean keep = true;
             for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
@@ -143,9 +169,14 @@ public class Diagnosis extends AppCompatActivity {
                 if (!keep)
                     break;
             }
+           // onClickSend("a");
+            //   try {
+            //     Thread.sleep(1000);
+            //} catch (InterruptedException e) {
+            //   e.printStackTrace();
+            //}
+           // onClickSend("a");
         }
-
-
     }
 
 
@@ -154,9 +185,16 @@ public class Diagnosis extends AppCompatActivity {
         startActivity(startNewActivity);
     }
 
-    public void onClickSend(String option) {
-        serialPort.write(option.getBytes());
-        //tvAppend(textView, "\nData Sent : " + string + "\n");
+    public void onClickSend(View view) {
+            serialPort.write("a".getBytes());
+            try{
+
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        serialPort.write("a".getBytes());
+        tvchange(sendButton,"Waiting");
 
     }
 
@@ -171,6 +209,73 @@ public class Diagnosis extends AppCompatActivity {
         }
         });
     }
+
+    void CalculateFinalResult(List<String> raw_result)
+    {
+       // List<String> last_ten = raw_result;
+        double temp = 0.0;
+        int count = 0;
+        for (int i=0; i < raw_result.size(); i++)
+        {
+            double element = Double.parseDouble(raw_result.get(i));
+
+
+            if(i > 10)
+            {
+                double previous = Double.parseDouble(raw_result.get(i-1));
+                if(Math.abs(element - previous) >= 10)
+                {
+
+                }
+                else {
+                    temp = temp + element;
+                    count++;
+                }
+
+            }
+        }
+        temp = temp / count;
+        ((GlobalVariables) this.getApplication()).setTemp(temp);;
+        tvAppend(testdisplay,Double.toString(temp) + "--result");
+        tvchange(sendButton,"Complete");
+
+        try{
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Intent startNewActivity = new Intent(Diagnosis.this, SignUp.class);
+        startActivity(startNewActivity);
+
+        return;
+    }
+
+    private void tvchange(Button tv, CharSequence text) {
+        final Button ftv = tv;
+        final CharSequence ftext = text;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ftv.setText(ftext);
+            }
+        });
+    }
+
+    private void tvreset(TextView tv, CharSequence text) {
+        final TextView ftv = tv;
+        final CharSequence ftext = text;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ftv.setText(ftext);
+            }
+        });
+    }
+
+
 }
 
 

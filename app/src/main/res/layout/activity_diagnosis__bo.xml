@@ -8,14 +8,14 @@
     tools:context="com.example.estelleyyy.clinic_in_a_box.Diagnosis_BO">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/spo2start"
         android:layout_width="146dp"
         android:layout_height="0dp"
         android:layout_marginBottom="366dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:backgroundTint="@color/red"
-        android:onClick="goToNext"
+        android:onClick="onClickSend"
         android:text="START"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
@@ -80,7 +80,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:onClick="onClickSend"
+        android:onClick="goToNext"
         android:text="send"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"

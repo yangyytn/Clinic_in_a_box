@@ -100,12 +100,14 @@ public class Tab_History extends Fragment {
         }
 
         // todo: delete testing data
+        /*
         for (i = 0; i < result.getCount(); i++){
             PressureData_1[i] = i;
             PressureData_2[i] = i + 10;
             OxygenData[i] = i;
             TemperatureData[i] = i;
         }
+*/
 
         reverse(PressureData_1);
         reverse(PressureData_2);
@@ -188,8 +190,6 @@ public class Tab_History extends Fragment {
         graph_temperature.getGridLabelRenderer().setVerticalLabelsColor(Color.parseColor("#bf0913"));
         graph_temperature.getGridLabelRenderer().setGridColor(Color.parseColor("#f1b2b5"));
 
-
-        // todo: change data series
         graph_risk.addSeries(series_risk);
         graph_pressure.addSeries(series_pressure_1);
         graph_pressure.addSeries(series_pressure_2);
