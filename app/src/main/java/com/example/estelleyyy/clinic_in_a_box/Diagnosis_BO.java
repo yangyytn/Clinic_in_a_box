@@ -92,7 +92,7 @@ public class Diagnosis_BO extends AppCompatActivity {
                     Log.d("SERIAL", "PERM NOT GRANTED");
                 }
             } else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_ATTACHED)) {
-                onClickStart();
+              //  onClickStart();
                 //onClickSend("temp");
             } //else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) {
             //onClickStop(stopButton);
@@ -151,7 +151,6 @@ public class Diagnosis_BO extends AppCompatActivity {
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
         registerReceiver(broadcastReceiver, filter);
-        tvAppend(testdisplay,"1");
         onClickStart();
     }
 
