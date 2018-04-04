@@ -235,7 +235,7 @@ public class Diagnosis extends AppCompatActivity {
             }
         }
         temp = temp / count;
-        //((GlobalVariables) this.getApplication()).setTemp(temp);;
+        ((GlobalVariables) this.getApplication()).setTemp(temp);;
         tvAppend(testdisplay,Double.toString(temp) + "--result");
         tvchange(sendButton,"Complete");
 

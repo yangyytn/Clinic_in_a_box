@@ -210,7 +210,7 @@ public class Diagnosis_BO extends AppCompatActivity {
         tvAppend(testdisplay,raw_result_1);
         double tempspo2 = Double.parseDouble(raw_result_1.trim());
 
-        //((GlobalVariables) this.getApplication()).setBloodPressure(tempspo2);
+        ((GlobalVariables) this.getApplication()).setOxygen(tempspo2);
         tvchange(sendButton,"Complete");
         try{
             Thread.sleep(1000);

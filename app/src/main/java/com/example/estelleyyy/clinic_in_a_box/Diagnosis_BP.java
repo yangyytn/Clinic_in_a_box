@@ -220,7 +220,7 @@ public class Diagnosis_BP extends AppCompatActivity {
         double[] result = new double[2];
         result[0] = tempsys;
         result[1] = tempdia;
-        //((GlobalVariables) this.getApplication()).setBloodPressure(result);
+        ((GlobalVariables) this.getApplication()).setBloodPressure(result);
 
         tvchange(sendButton,"Complete");
         try{
