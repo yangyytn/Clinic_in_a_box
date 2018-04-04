@@ -41,7 +41,7 @@ public class Diagnosis_BP extends AppCompatActivity {
     String sys;
     List<String> dia;
     String regex;
-    int count;
+    int count=1;
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
@@ -63,8 +63,10 @@ public class Diagnosis_BP extends AppCompatActivity {
                     if(count == 1) {
                         CalculateFinalResult(sys);
                     }
-                    else{}
+                    else{serialPort.close();}
+
                     serialPort.close();
+                    count =0;
                 }
 
             } catch (UnsupportedEncodingException e) {
@@ -124,7 +126,7 @@ public class Diagnosis_BP extends AppCompatActivity {
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
         IntentFilter filter = new IntentFilter();
         sys = " ";
-        count = 1;
+        //count = 1;
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
@@ -208,7 +210,7 @@ public class Diagnosis_BP extends AppCompatActivity {
         String word3 = "Pulse";
         double tempsys = 0.0;
         double tempdia = 0.0;
-        int count = 0;
+        //int count = 0;
 
         tempsys = Double.parseDouble(raw_result_1.substring((raw_result_1.indexOf(word1)+8),(raw_result_1.indexOf(word2))));
 
@@ -227,7 +229,7 @@ public class Diagnosis_BP extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Intent startNewActivity = new Intent(Diagnosis_BP.this, Diagnosis.class);
+        Intent startNewActivity = new Intent(Diagnosis_BP.this, Diagnosis_BO.class);
         startActivity(startNewActivity);
 
         count++;

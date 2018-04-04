@@ -218,7 +218,7 @@ public class Diagnosis_BO extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Intent startNewActivity = new Intent(Diagnosis_BO.this, SignUp.class);
+        Intent startNewActivity = new Intent(Diagnosis_BO.this, Diagnosis.class);
         startActivity(startNewActivity);
 
         return;

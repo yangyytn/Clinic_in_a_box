@@ -245,7 +245,7 @@ public class Diagnosis extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Intent startNewActivity = new Intent(Diagnosis.this, Diagnosis_BO.class);
+        Intent startNewActivity = new Intent(Diagnosis.this, SignUp.class);
         startActivity(startNewActivity);
 
         return;
