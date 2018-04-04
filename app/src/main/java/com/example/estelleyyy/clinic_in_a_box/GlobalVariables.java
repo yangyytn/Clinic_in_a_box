@@ -10,8 +10,9 @@ import java.util.List;
  */
 
 public class GlobalVariables extends Application {
-    private int patientID;
-    private String firstName, lastName;
+    private int patientID = 0;
+    private String firstName = "";
+    private String lastName = "";
 
     public int getPatientID() {
         return patientID;
@@ -39,7 +40,7 @@ public class GlobalVariables extends Application {
 
 
     // questionnaire results
-    private int[] Qresult = new int[5];
+    private int[] Qresult = new int[] {0, 0, 0, 0, 0};
     private int age;
 
     public int[] getQresult() {
@@ -59,7 +60,7 @@ public class GlobalVariables extends Application {
     //two values for BP: systalic, dia...
     private double[] BloodPressure = new double[] {0.0, 0.0};
     private double oxygen = 98;
-    private double armpit = 0.0;
+    private double armpit = 35.1;
 
     public double[] getBloodPressure() {
         return BloodPressure;

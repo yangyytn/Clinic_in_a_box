@@ -18,12 +18,12 @@ public class Finish extends AppCompatActivity {
     }
 
 
-    public void goToQuestionnaire(View v) {
+    /* public void goToQuestionnaire(View v) {
         Intent startNewActivity = new Intent(this, Questionnaire.class);
         startActivity(startNewActivity);
-    }
+    }*/
 
-    public void goToNext(View v){
+    public void goToFront(View v){
         // clear global variables
 
         //while pid still not 0: keep reset globals

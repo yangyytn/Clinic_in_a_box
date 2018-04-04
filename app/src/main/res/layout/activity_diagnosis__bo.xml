@@ -10,10 +10,11 @@
     <Button
         android:id="@+id/spo2start"
         android:layout_width="146dp"
-        android:layout_height="0dp"
+        android:layout_height="67dp"
         android:layout_marginBottom="366dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/red"
         android:onClick="onClickSend"
         android:text="START"
@@ -21,40 +22,25 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.997" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="639dp"
         android:layout_height="121dp"
         android:layout_marginBottom="14dp"
+        android:layout_marginTop="360dp"
         android:gravity="center"
         android:text="Please clip SPO2 sensor on your finger and then press"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="727dp"
-        android:layout_height="688dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintHorizontal_bias="0.146"
+        app:layout_constraintHorizontal_bias="0.651"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:srcCompat="@drawable/o2_banner" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="466dp"
-        android:layout_height="418dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sensor_spo2_bt_big" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView16"
@@ -71,6 +57,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="727dp"
+        android:layout_height="503dp"
+        android:layout_marginTop="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.962"
+        app:srcCompat="@drawable/o2_banner" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="466dp"
+        android:layout_height="418dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sensor_spo2_bt_big" />
 
     <Button
         android:id="@+id/send"

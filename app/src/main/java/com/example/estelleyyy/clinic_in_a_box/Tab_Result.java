@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Tab_Result extends Fragment {
 
@@ -26,6 +25,7 @@ public class Tab_Result extends Fragment {
         // use the below 2 lines for results display!!!!!!
 
         int[] Qresults;
+        System.out.println("before using global: Qresults");
         Qresults = ((GlobalVariables) this.getActivity().getApplication()).getQresult();
 
 
@@ -33,6 +33,7 @@ public class Tab_Result extends Fragment {
             System.out.println("Qresult is: " + Qresults[i]);
         }
 
+        System.out.println("before using global: risk");
         double Result = ((GlobalVariables) this.getActivity().getApplication()).getRisk();
 
         String output1 = (int) Result + "%";
@@ -53,8 +54,11 @@ public class Tab_Result extends Fragment {
         String test1="";
         String test2="";
         String test3="";
+        System.out.println("before using global: bp");
         double[] BloodPressure = ((GlobalVariables) this.getActivity().getApplication()).getBloodPressure();
+        System.out.println("before using global: bo");
         double BloodOxy = ((GlobalVariables) this.getActivity().getApplication()).getOxygen();
+        System.out.println("before using global: temp");
         double temp = ((GlobalVariables) this.getActivity().getApplication()).getTemp();
         //output+="Below shows the physical test results for the current patient: .\n";
         test1+="Systolic Pressure: " + BloodPressure[0];
@@ -88,7 +92,6 @@ public class Tab_Result extends Fragment {
             tvsetcolor (textView1, "#e65c00");
             tvsetcolor (textView2, "#e65c00");
         }
-
 
 
         TextView textView3 = rootView.findViewById(R.id.textView13);

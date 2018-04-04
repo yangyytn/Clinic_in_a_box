@@ -26,13 +26,14 @@ public class Login extends AppCompatActivity {
 
         userId = (EditText)findViewById(R.id.userID);
         password = (EditText)findViewById(R.id.password);
-        btnViewTest = (Button) findViewById(R.id.buttonTest);
+/*        btnViewTest = (Button) findViewById(R.id.buttonTest);
         btnViewPatient = (Button) findViewById(R.id.buttonPatient);
 
         viewAllTestData();
         viewAllPatients();
+        */
     }
-
+/*
     public void viewAllTestData(){
 
         btnViewTest.setOnClickListener(
@@ -98,6 +99,7 @@ public class Login extends AppCompatActivity {
             }
         );
     }
+*/
 
     public void showMessage(String title, String Message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
